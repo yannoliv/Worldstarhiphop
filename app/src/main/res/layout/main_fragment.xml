@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.tabs.TabLayout
+    android:id="@+id/tabs"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.google.android.material.tabs.TabItem
+        android:text="albums"/>
+    <com.google.android.material.tabs.TabItem
+        android:text="artiesten"/>
+    <com.google.android.material.tabs.TabItem
+        android:text="playlists"/>
+
+</com.google.android.material.tabs.TabLayout>
