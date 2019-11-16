@@ -1,5 +1,6 @@
 package com.example.worldstarhiphop
 
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -34,6 +35,13 @@ class MainActivity : AppCompatActivity() {
 
         setupViewPager(viewPager)
         tabLayout.setupWithViewPager(viewPager)
+
+        setupTabIcons()
+    }
+
+    private fun setupTabIcons(){
+        binding.tabs.getTabAt(0)!!.setIcon(R.drawable.ic_person_black_24dp)
+        binding.tabs.getTabAt(1)!!.setIcon(R.drawable.ic_playlist_play_black_24dp)
     }
 
     private fun setupViewPager(viewPager: ViewPager) {
