@@ -29,14 +29,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.main_activity)
 
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
         var tabLayout: TabLayout = binding.tabs
         var viewPager: ViewPager = binding.viewpager
 
         setupViewPager(viewPager)
         tabLayout.setupWithViewPager(viewPager)
-
     }
 
     private fun setupViewPager(viewPager: ViewPager) {
