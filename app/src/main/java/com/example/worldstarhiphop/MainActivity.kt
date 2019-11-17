@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.worldstarhiphop.databinding.MainActivityBinding
-import com.example.worldstarhiphop.ui.main.MainFragment
 import androidx.viewpager.widget.ViewPager
 import androidx.core.app.ComponentActivity
 import androidx.core.app.ComponentActivity.ExtraData
@@ -40,14 +39,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupTabIcons(){
-        binding.tabs.getTabAt(0)!!.setIcon(R.drawable.ic_person_black_24dp)
-        binding.tabs.getTabAt(1)!!.setIcon(R.drawable.ic_playlist_play_black_24dp)
+        binding.tabs.getTabAt(0)!!.setIcon(R.drawable.ic_playlist_play_black_24dp)
+        binding.tabs.getTabAt(1)!!.setIcon(R.drawable.ic_person_black_24dp)
     }
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(ArtiestenFragment(), "Artiesten")
         adapter.addFragment(PlaylistsFragment(), "Playlists")
+        adapter.addFragment(ArtiestenFragment(), "Artiesten")
         viewPager.adapter = adapter
     }
 
