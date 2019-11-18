@@ -10,16 +10,25 @@
             type="com.example.worldstarhiphop.ui.main.ArtiestenViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
         tools:context=".MainActivity">
 
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.artist.name}" />
-    </FrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listArtiesten"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:padding="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:listData="@{viewModel.artists}"
+            android:clipToPadding="false"
+            tools:itemCount="16"
+            tools:listitem="@layout/artiesten_grid_item"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

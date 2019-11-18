@@ -22,8 +22,8 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface DeezerApiService {
-    @GET("artist/7543848")
-    fun getProperties(): Deferred<Artist>
+    @GET("chart/0/artists")
+    fun getProperties(): Deferred<List<Artist>>
 }
 
 

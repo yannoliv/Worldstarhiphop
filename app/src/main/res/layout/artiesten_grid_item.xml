@@ -5,25 +5,21 @@
 
     <data>
         <variable
-            name="viewModel"
-            type="com.example.worldstarhiphop.ui.main.ArtiestenViewModel" />
+            name="artist"
+            type="com.example.worldstarhiphop.network.Artist" />
     </data>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@{viewModel.artist.pictureBig}" />
-
-</layout>
-<!--
-<ImageView
+    <ImageView
         android:id="@+id/mars_image"
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:scaleType="centerCrop"
         android:adjustViewBounds="true"
         android:padding="2dp"
-        app:imageUrl="@{viewModel.artist.pictureBig}"
+        app:imageUrl="@{artist.pictureBig}"
         tools:src="@tools:sample/backgrounds/scenic"/>
+
+</layout>
+<!--
+
 -->

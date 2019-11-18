@@ -21,10 +21,10 @@ class ArtiestenViewModel : ViewModel() {
     val status: LiveData<String>
         get() = _status
 
-    private val _artist = MutableLiveData<Artist>()
+    private val _artists = MutableLiveData<List<Artist>>()
 
-    val artist: LiveData<Artist>
-        get() = _artist
+    val artists: LiveData<List<Artist>>
+        get() = _artists
 
 
 
@@ -41,8 +41,8 @@ class ArtiestenViewModel : ViewModel() {
             var getPropertiesDeferred = DeezerAPI.retrofitService.getProperties()
             try{
                 var resultaat = getPropertiesDeferred.await()
-                _artist.value = resultaat
-                _status.value =  "Success: ${resultaat?.name} "
+                _artists.value = resultaat
+                _status.value =  "Success: ${resultaat} "
             }catch (t: Throwable){
                 _status.value = "Failure: " + t.message
             }

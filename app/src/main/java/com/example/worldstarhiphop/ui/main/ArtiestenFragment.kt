@@ -26,7 +26,10 @@ class ArtiestenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = ArtiestenGridItemBinding.inflate(inflater)
+        val binding = ArtiestenFragmentBinding.inflate(inflater)
+
+        binding.listArtiesten.adapter = PhotoGridAdapter()
+
 
         binding.setLifecycleOwner(this)
         binding.viewModel = viewModel
