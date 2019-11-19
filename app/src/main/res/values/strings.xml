@@ -4,4 +4,6 @@
     <string name="artiesten">Artiesten</string>
     <string name="playlists">Playlists</string>
     <string name="album_cover">Album Cover</string>
+    <string name="artistCover">Artist cover</string>
+    <string name="artiest">ARTIEST</string>
 </resources>

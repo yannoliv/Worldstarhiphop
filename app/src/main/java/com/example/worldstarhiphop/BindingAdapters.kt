@@ -1,5 +1,6 @@
 package com.example.worldstarhiphop
 
+import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.worldstarhiphop.network.Artist
+import com.example.worldstarhiphop.ui.main.ArtiestenViewModel
 import com.example.worldstarhiphop.ui.main.PhotoGridAdapter
 
 @BindingAdapter("imageUrl")
@@ -17,8 +19,8 @@ fun bindImage(imgView: ImageView, imgUrl: String?){
             .load(imgUri)
             .apply(
                 RequestOptions()
-                    .placeholder(R.drawable.ic_person_black_24dp)
-                    .error(R.drawable.ic_view_stream_black_24dp))
+                    .placeholder(R.drawable.loading_animation)
+                    .error(R.drawable.ic_broken_image))
             .into(imgView)
     }
 }
@@ -27,4 +29,21 @@ fun bindImage(imgView: ImageView, imgUrl: String?){
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Artist>?) {
     val adapter = recyclerView.adapter as PhotoGridAdapter
     adapter.submitList(data)
+}
+
+@BindingAdapter("deezerApiStatus")
+fun bindStatus(statusImageView: ImageView, status: ArtiestenViewModel.DeezerApiStatus?) {
+    when (status) {
+        ArtiestenViewModel.DeezerApiStatus.LOADING -> {
+            statusImageView.visibility = View.VISIBLE
+            statusImageView.setImageResource(R.drawable.loading_animation)
+        }
+        ArtiestenViewModel.DeezerApiStatus.ERROR -> {
+            statusImageView.visibility = View.VISIBLE
+            statusImageView.setImageResource(R.drawable.ic_connection_error)
+        }
+        ArtiestenViewModel.DeezerApiStatus.DONE -> {
+            statusImageView.visibility = View.GONE
+        }
+    }
 }

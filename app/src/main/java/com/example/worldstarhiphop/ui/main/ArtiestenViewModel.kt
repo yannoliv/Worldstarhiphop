@@ -16,10 +16,11 @@ import retrofit2.Response
 
 class ArtiestenViewModel : ViewModel() {
 
+    enum class DeezerApiStatus { LOADING, ERROR, DONE }
 
-    private val _status = MutableLiveData<String>()
+    private val _status = MutableLiveData<DeezerApiStatus>()
 
-    val status: LiveData<String>
+    val status: LiveData<DeezerApiStatus>
         get() = _status
 
     private val _artists = MutableLiveData<List<Artist>>()
@@ -41,11 +42,13 @@ class ArtiestenViewModel : ViewModel() {
         coroutineScope.launch{
             var getPropertiesDeferred = DeezerAPI.retrofitService.getProperties()
             try{
+                _status.value = DeezerApiStatus.LOADING
                 var resultaat = getPropertiesDeferred.await()
                 _artists.value = resultaat.data
-                _status.value =  "Success: ${resultaat.data} "
+                _status.value = DeezerApiStatus.DONE
             }catch (t: Throwable){
-                _status.value = "Failure: " + t.message
+                _status.value = DeezerApiStatus.ERROR
+                _artists.value = ArrayList()
             }
         }
     }

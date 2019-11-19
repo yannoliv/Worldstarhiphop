@@ -46,8 +46,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(PlaylistsFragment(), "Playlists")
         adapter.addFragment(ArtiestenFragment(), "Artiesten")
+        adapter.addFragment(PlaylistsFragment(), "Playlists")
         viewPager.adapter = adapter
     }
 
