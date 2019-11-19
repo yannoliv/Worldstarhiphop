@@ -64,14 +64,29 @@ class PlaylistsFragment : Fragment() {
 
     }
 
-    fun initialiseerAlbum(){
+    fun initialiseerAlbum() {
         Glide.with(this)
             .load(albumCover)
-            .thumbnail(Glide.with(this)
-                .load(albumCoverSmall)
+            .thumbnail(
+                Glide.with(this)
+                    .load(albumCoverSmall)
             )
             .into(binding.albumCover);
-        mediaPlayer = MediaPlayer.create(context, com.example.worldstarhiphop.R.raw.postmalone)
+        //mediaPlayer = MediaPlayer.create(context, com.example.worldstarhiphop.R.raw.postmalone)
+        try {
+            mediaPlayer = MediaPlayer().apply {
+                setAudioAttributes(
+                    AudioAttributes.Builder()
+                        .setUsage(AudioAttributes.USAGE_MEDIA)
+                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .build()
+                )
+                setDataSource(muziekurl)
+                prepare() // might take long! (for buffering, etc)
+            }
+        } catch (e: Exception) {
+            print(e)
+        }
     }
 
     fun startPlaying(){
@@ -103,9 +118,4 @@ try{
             print(e)
         }
 
- */
-
-/*
-Picasso.get().load("https://cdns-images.dzcdn.net/images/cover/4642b8e3e0a89f92a6e2bfed13d8f31c/500x500-000000-80-0-0.jpg")
-            .into(binding.albumCover);
  */
