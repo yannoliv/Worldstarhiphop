@@ -1,5 +1,6 @@
 package com.example.worldstarhiphop.ui.main
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -32,17 +33,17 @@ class ArtiestenViewModel : ViewModel() {
     private val coroutineScope= CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init{
-        getPostMaloneProperties()
+        getArtiesten()
     }
 
-    private fun getPostMaloneProperties(){
+    private fun getArtiesten(){
 
         coroutineScope.launch{
             var getPropertiesDeferred = DeezerAPI.retrofitService.getProperties()
             try{
                 var resultaat = getPropertiesDeferred.await()
-                _artists.value = resultaat
-                _status.value =  "Success: ${resultaat} "
+                _artists.value = resultaat.data
+                _status.value =  "Success: ${resultaat.data} "
             }catch (t: Throwable){
                 _status.value = "Failure: " + t.message
             }
