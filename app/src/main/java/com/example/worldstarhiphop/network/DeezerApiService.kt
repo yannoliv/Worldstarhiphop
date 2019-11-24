@@ -8,6 +8,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 private const val BASE_URL = "https://api.deezer.com"
 
@@ -22,8 +23,11 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface DeezerApiService {
-    @GET("chart/0/artists")
-    fun getProperties(): Deferred<ArtistListObject>
+    @GET("genre/116/artists")
+    fun getArtiesten(): Deferred<ArtistListObject>
+
+    @GET("artist/{id}/top?limit=5")
+    fun getTracksVanArtiest(@Path("id") id:Int): Deferred<TrackListObject>
 }
 
 
@@ -32,3 +36,5 @@ object DeezerAPI{
         retrofit.create(DeezerApiService::class.java)
     }
 }
+
+// artist/{{ArtiestID}}/top?limit=5

@@ -34,7 +34,6 @@ class ArtiestenFragment : Fragment() {
         binding.setLifecycleOwner(this)
         binding.viewModel = viewModel
 
-
         return binding.root
     }
 

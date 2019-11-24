@@ -10,6 +10,7 @@
     </style>
 
     <style name="AppTheme.Launcher">
+        <item name="android:colorPrimaryDark">@color/colorPrimary</item>
         <item name="android:windowBackground">@drawable/launch_screen</item>
     </style>
 

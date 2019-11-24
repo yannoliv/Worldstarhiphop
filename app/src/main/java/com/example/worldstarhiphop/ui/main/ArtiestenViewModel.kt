@@ -40,7 +40,7 @@ class ArtiestenViewModel : ViewModel() {
     private fun getArtiesten(){
 
         coroutineScope.launch{
-            var getPropertiesDeferred = DeezerAPI.retrofitService.getProperties()
+            var getPropertiesDeferred = DeezerAPI.retrofitService.getArtiesten()
             try{
                 _status.value = DeezerApiStatus.LOADING
                 var resultaat = getPropertiesDeferred.await()
