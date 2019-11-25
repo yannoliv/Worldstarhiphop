@@ -29,7 +29,7 @@ class ArtiestenViewModel : ViewModel() {
         get() = _artists
 
 
-
+    // [H8 - Exercise 9]
     private var viewModelJob= Job()
     private val coroutineScope= CoroutineScope(viewModelJob + Dispatchers.Main)
 
@@ -37,7 +37,8 @@ class ArtiestenViewModel : ViewModel() {
         getArtiesten()
     }
 
-    private fun getArtiesten(){
+    // Is public zodat we kunnen refreshen
+    public fun getArtiesten(){
 
         coroutineScope.launch{
             var getPropertiesDeferred = DeezerAPI.retrofitService.getArtiesten()
