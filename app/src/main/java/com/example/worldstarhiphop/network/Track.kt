@@ -12,7 +12,7 @@ data class Track(
     val explicit_lyrics: Boolean,
     val explicit_cover: Int,
     val preview: String,
-    val contributors: List<Artist>,
+    val contributors: List<Contributor>,
     val total: Int,
     val next: String
 )

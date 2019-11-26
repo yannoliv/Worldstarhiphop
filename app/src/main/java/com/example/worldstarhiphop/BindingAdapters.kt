@@ -1,22 +1,17 @@
 package com.example.worldstarhiphop
 
-import android.app.Activity
-import android.content.Context
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.worldstarhiphop.network.Artist
+import com.example.worldstarhiphop.network.Track
 import com.example.worldstarhiphop.ui.main.ArtiestenViewModel
+import com.example.worldstarhiphop.ui.main.ArtistGridItemAdapter
 import com.example.worldstarhiphop.ui.main.PhotoGridAdapter
-import com.example.worldstarhiphop.ui.main.PlaylistsFragment
-import kotlin.coroutines.coroutineContext
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?){
@@ -35,6 +30,12 @@ fun bindImage(imgView: ImageView, imgUrl: String?){
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Artist>?) {
     val adapter = recyclerView.adapter as PhotoGridAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("listLiedjeData")
+fun bindRecyclerViewLiedje(recyclerView: RecyclerView, data: List<Track>?){
+    val adapter = recyclerView.adapter as ArtistGridItemAdapter
     adapter.submitList(data)
 }
 
