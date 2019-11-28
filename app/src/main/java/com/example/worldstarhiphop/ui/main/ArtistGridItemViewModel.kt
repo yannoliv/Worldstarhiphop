@@ -24,7 +24,7 @@ class ArtistGridItemViewModel : ViewModel() {
 
     private val _tracks= MutableLiveData<List<Track>>()
 
-    val artists: LiveData<List<Track>>
+    val tracks: LiveData<List<Track>>
         get() = _tracks
 
 
