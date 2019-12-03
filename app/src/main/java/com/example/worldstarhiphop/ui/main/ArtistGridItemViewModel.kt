@@ -32,16 +32,11 @@ class ArtistGridItemViewModel : ViewModel() {
     private var viewModelJob= Job()
     private val coroutineScope= CoroutineScope(viewModelJob + Dispatchers.Main)
 
-
-    init{
-        getTracksVanArtiest()
-    }
-
     // Is public zodat we kunnen refreshen
-    public fun getTracksVanArtiest(){
+    fun getTracksVanArtiest(id: Int){
 
         coroutineScope.launch{
-            var getPropertiesDeferred = DeezerAPI.retrofitService.getTracksVanArtiest()
+            var getPropertiesDeferred = DeezerAPI.retrofitService.getTracksVanArtiest(id)
             try{
                 _status.value = DeezerApiStatus.LOADING
                 var resultaat = getPropertiesDeferred.await()

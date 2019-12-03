@@ -5,19 +5,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.worldstarhiphop.databinding.ArtiestenGridItemBinding
 import com.example.worldstarhiphop.databinding.ArtiestenLiedjeItemBinding
 import com.example.worldstarhiphop.network.Track
 
-class ArtistGridItemAdapter : ListAdapter<Track, ArtistGridItemAdapter.TrackViewHolder>(DiffCallback) {
+class TrackItemAdapter : ListAdapter<Track, TrackItemAdapter.TrackViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ArtistGridItemAdapter.TrackViewHolder {
+    ): TrackItemAdapter.TrackViewHolder {
         return TrackViewHolder(ArtiestenLiedjeItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    override fun onBindViewHolder(holder: ArtistGridItemAdapter.TrackViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TrackItemAdapter.TrackViewHolder, position: Int) {
         val track = getItem(position)
         holder.bind(track)
     }

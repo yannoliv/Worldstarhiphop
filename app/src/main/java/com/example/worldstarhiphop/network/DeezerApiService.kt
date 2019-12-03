@@ -26,13 +26,12 @@ interface DeezerApiService {
     @GET("genre/116/artists")
     fun getArtiesten(): Deferred<ArtistListObject>
 
-    /*
     @GET("artist/{id}/top?limit=5")
     fun getTracksVanArtiest(@Path("id") id:Int): Deferred<TrackListObject>
-    */
-
+/*
     @GET("artist/13/top?limit=5")
     fun getTracksVanArtiest(): Deferred<TrackListObject>
+*/
 }
 
 

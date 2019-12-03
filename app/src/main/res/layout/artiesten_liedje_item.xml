@@ -18,7 +18,7 @@
             android:id="@+id/nummer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{track.rank}"
+            android:text="@{String.valueOf(track.rank)}"
             tools:text="1"
             android:layout_marginLeft="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -37,22 +37,14 @@
             app:layout_constraintTop_toTopOf="parent">
         </TextView>
 
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginRight="8dp"
-            android:src="@drawable/ic_remove_red_eye_black_24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/aantalKijkers"
-            android:tint="@android:color/darker_gray"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:id="@+id/aantalKijkers"
             android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
-            android:text="@{track.total}"
+            android:text="80k"
             tools:text="80K"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnPlayPause"
@@ -81,5 +73,18 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:backgroundTint="@android:color/darker_gray"
+            app:layout_constraintTop_toTopOf="parent" />
+-->
+
+<!--
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_remove_red_eye_black_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/aantalKijkers"
+            android:tint="@android:color/darker_gray"
             app:layout_constraintTop_toTopOf="parent" />
 -->

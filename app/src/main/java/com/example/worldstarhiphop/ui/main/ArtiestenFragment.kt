@@ -42,8 +42,8 @@ class ArtiestenFragment : Fragment() {
         bindingGridItem = DataBindingUtil.inflate(inflater, R.layout.artiesten_grid_item, container, false)
         bindingLiedjeItem = DataBindingUtil.inflate(inflater, R.layout.artiesten_liedje_item, container, false)
 
-        binding.listArtiesten.adapter = PhotoGridAdapter()
-        bindingGridItem.recyclerLiedjeItem.adapter = ArtistGridItemAdapter()
+        binding.listArtiesten.adapter = ArtistItemAdapter(this)
+        bindingGridItem.recyclerLiedjeItem.adapter = TrackItemAdapter()
 
         binding.setLifecycleOwner(this)
 

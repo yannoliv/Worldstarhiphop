@@ -10,8 +10,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.worldstarhiphop.network.Artist
 import com.example.worldstarhiphop.network.Track
 import com.example.worldstarhiphop.ui.main.ArtiestenViewModel
-import com.example.worldstarhiphop.ui.main.ArtistGridItemAdapter
-import com.example.worldstarhiphop.ui.main.PhotoGridAdapter
+import com.example.worldstarhiphop.ui.main.TrackItemAdapter
+import com.example.worldstarhiphop.ui.main.ArtistItemAdapter
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?){
@@ -29,13 +29,13 @@ fun bindImage(imgView: ImageView, imgUrl: String?){
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Artist>?) {
-    val adapter = recyclerView.adapter as PhotoGridAdapter
+    val adapter = recyclerView.adapter as ArtistItemAdapter
     adapter.submitList(data)
 }
 
 @BindingAdapter("listLiedjeData")
 fun bindRecyclerViewLiedje(recyclerView: RecyclerView, data: List<Track>?){
-    val adapter = recyclerView.adapter as ArtistGridItemAdapter
+    val adapter = recyclerView.adapter as TrackItemAdapter
     adapter.submitList(data)
 }
 

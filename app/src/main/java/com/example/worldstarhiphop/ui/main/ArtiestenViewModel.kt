@@ -38,7 +38,7 @@ class ArtiestenViewModel : ViewModel() {
     }
 
     // Is public zodat we kunnen refreshen
-    public fun getArtiesten(){
+    fun getArtiesten(){
 
         coroutineScope.launch{
             var getPropertiesDeferred = DeezerAPI.retrofitService.getArtiesten()

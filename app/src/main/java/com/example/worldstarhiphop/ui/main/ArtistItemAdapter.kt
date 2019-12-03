@@ -1,7 +1,5 @@
 package com.example.worldstarhiphop.ui.main
 
-import android.app.Activity
-import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,15 +8,12 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.worldstarhiphop.databinding.ArtiestenGridItemBinding
 import com.example.worldstarhiphop.network.Artist
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
-import androidx.appcompat.app.AppCompatActivity
 
 
+class ArtistItemAdapter(artiestenFragmentInput: ArtiestenFragment) : ListAdapter<Artist, ArtistItemAdapter.ArtistViewHolder>(DiffCallback) {
 
-
-
-class PhotoGridAdapter : ListAdapter<Artist, PhotoGridAdapter.ArtistViewHolder>(DiffCallback) {
+    var artiestenFragment = artiestenFragmentInput
 
     class PhotoViewHolder(internal val binding: ArtiestenGridItemBinding, val context: Context) :
         RecyclerView.ViewHolder(binding.getRoot()) {
@@ -33,13 +28,13 @@ class PhotoGridAdapter : ListAdapter<Artist, PhotoGridAdapter.ArtistViewHolder>(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): PhotoGridAdapter.ArtistViewHolder {
+    ): ArtistItemAdapter.ArtistViewHolder {
         return ArtistViewHolder(ArtiestenGridItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
-    override fun onBindViewHolder(holder: PhotoGridAdapter.ArtistViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ArtistItemAdapter.ArtistViewHolder, position: Int) {
         val artist = getItem(position)
-        holder.bind(artist)
+        holder.bind(artist, artiestenFragment)
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<Artist>() {
@@ -54,11 +49,13 @@ class PhotoGridAdapter : ListAdapter<Artist, PhotoGridAdapter.ArtistViewHolder>(
 
     class ArtistViewHolder(private var binding: ArtiestenGridItemBinding):
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(artist: Artist) {
+        fun bind(artist: Artist, artiestenFragment: ArtiestenFragment) {
             binding.artist = artist
-            binding.recyclerLiedjeItem.adapter = ArtistGridItemAdapter()
-            //binding.viewModel = ViewModelProviders.of(Activity as AppCompatActivity)
-            //    .get(ArtistGridItemViewModel::class.java!!)
+            binding.recyclerLiedjeItem.adapter = TrackItemAdapter()
+            ViewModelProviders.of(artiestenFragment)
+                .get(ArtistGridItemViewModel::class.java!!).getTracksVanArtiest(artist.id)
+            binding.viewModel = ViewModelProviders.of(artiestenFragment)
+                .get(ArtistGridItemViewModel::class.java!!)
             binding.executePendingBindings()
         }
     }
