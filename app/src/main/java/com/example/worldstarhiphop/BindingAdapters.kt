@@ -55,8 +55,3 @@ fun bindStatus(statusImageView: ImageView, status: ArtiestenViewModel.DeezerApiS
         }
     }
 }
-
-// 20. Exercise H7
-class ArtiestListener(val clickListener: (artistId: Int) -> Unit) {
-    fun onClick(artist: Artist) = clickListener(artist.id)
-}

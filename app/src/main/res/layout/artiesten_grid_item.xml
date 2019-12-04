@@ -9,10 +9,6 @@
             type="com.example.worldstarhiphop.network.Artist" />
 
         <variable
-            name="clickListener"
-            type="com.example.worldstarhiphop.ArtiestListener"/>
-
-        <variable
             name="viewModel"
             type="com.example.worldstarhiphop.ui.main.ArtistGridItemViewModel" />
 
@@ -38,14 +34,14 @@
             android:id="@+id/whitebarArtist"
             android:layout_width="match_parent"
             android:layout_height="110dp"
-            android:onClick="@{() -> clickListener.onClick(artist)}">
+            android:background="@drawable/button_ripple">
 
             <ImageView
                 android:id="@+id/pijltje"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginBottom="5dp"
-                android:src="@drawable/ic_keyboard_arrow_down_black_24dp"
+                android:background="@drawable/ic_keyboard_arrow_down_black_24dp"
                 android:tint="@android:color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -63,6 +59,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/textView2"
                 style="@style/ArtistNameStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,12 +70,24 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView"
                 tools:text="Post Malone" />
 
+            <View
+                android:id="@+id/streepBovenRecyclerView"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerLiedjeItem"
+            android:visibility="gone"
             android:layout_margin="0dp"
-            android:padding="0dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:clipToPadding="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

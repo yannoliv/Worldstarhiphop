@@ -1,5 +1,7 @@
 package com.example.worldstarhiphop.ui.main
 
+import android.media.AudioAttributes
+import android.media.MediaPlayer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,17 +11,15 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 
 import com.example.worldstarhiphop.databinding.ArtiestenFragmentBinding
-import com.example.worldstarhiphop.databinding.ArtiestenGridItemBinding
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.worldstarhiphop.R
-import com.example.worldstarhiphop.databinding.ArtiestenLiedjeItemBinding
 
 
 class ArtiestenFragment : Fragment() {
 
     private lateinit var binding: ArtiestenFragmentBinding
-    private lateinit var bindingGridItem: ArtiestenGridItemBinding
-    private lateinit var bindingLiedjeItem: ArtiestenLiedjeItemBinding
+
+    private var mediaPlayer: MediaPlayer = MediaPlayer()
 
 
     private val viewModel: ArtiestenViewModel by lazy {
@@ -39,16 +39,21 @@ class ArtiestenFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.artiesten_fragment, container, false)
-        bindingGridItem = DataBindingUtil.inflate(inflater, R.layout.artiesten_grid_item, container, false)
-        bindingLiedjeItem = DataBindingUtil.inflate(inflater, R.layout.artiesten_liedje_item, container, false)
 
-        binding.listArtiesten.adapter = ArtistItemAdapter(this)
-        bindingGridItem.recyclerLiedjeItem.adapter = TrackItemAdapter()
+        mediaPlayer.apply {
+            setAudioAttributes(
+                AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                    .build()
+            )
+        }
+
+        binding.listArtiesten.adapter = ArtistItemAdapter(this, mediaPlayer)
 
         binding.setLifecycleOwner(this)
 
         binding.viewModel = viewModel
-        bindingGridItem.viewModel = viewModelArtistGridItem
 
         initialiseerSwipeRefreshLayout()
 
