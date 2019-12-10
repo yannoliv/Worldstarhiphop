@@ -16,6 +16,13 @@ import com.bumptech.glide.Glide
 import com.example.worldstarhiphop.R
 import com.example.worldstarhiphop.databinding.ArtiestenLiedjeItemBinding
 import com.example.worldstarhiphop.network.Track
+import android.widget.CompoundButton
+import androidx.databinding.adapters.CompoundButtonBindingAdapter.setChecked
+import androidx.databinding.adapters.TextViewBindingAdapter.setText
+
+
+
+
 
 class TrackItemAdapter(
     artiestenFragmentInput: ArtiestenFragment,
@@ -24,6 +31,11 @@ class TrackItemAdapter(
 
     private val artiestenFragment = artiestenFragmentInput
     private var mediaPlayer = mediaPlayerInput
+
+    //
+    var pre = -1
+    var recent = -1
+    var clicked = false
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -35,6 +47,19 @@ class TrackItemAdapter(
     override fun onBindViewHolder(holder: TrackItemAdapter.TrackViewHolder, position: Int) {
         val track = getItem(position)
         holder.bind(track, artiestenFragment, mediaPlayer)
+
+        if(clicked)
+        {
+            /*
+            if(pre!=-1 && pos==pre)
+                stop(pre);//your code to stop the video
+            if(pos==recent)
+            {
+                playvideo(recent);
+                clicked=false;
+            }
+             */
+        }
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<Track>() {
@@ -53,16 +78,52 @@ class TrackItemAdapter(
         fun bind(track: Track, artiestenFragment: ArtiestenFragment, mediaPlayer: MediaPlayer) {
             binding.track = track
 
+            // Pauzeren
+            binding.imageViewPlayPause.setOnClickListener(View.OnClickListener {
+                if(mediaPlayer.isPlaying){
+                    inversePlaying(artiestenFragment, mediaPlayer)
+                    mediaPlayer.pause()
+                }
+            })
+
             // Liedje afspelen
             binding.liedjeBalk.setOnClickListener(View.OnClickListener {
                 initialiseerLiedje(track, mediaPlayer)
                 startPlaying(artiestenFragment, mediaPlayer)
+
+                /*
+                clicked=true;
+                pre=recent;
+                recent=clickedposition;
+                if(pre!=-1)
+                    this.notifyItemChanged(pre);
+                this.notifyItemChanged(recent);
+                */
             })
+
 
             binding.executePendingBindings()
         }
 
         private fun startPlaying(artiestenFragment: ArtiestenFragment, mediaPlayer: MediaPlayer){
+            inversePlaying(artiestenFragment, mediaPlayer)
+        }
+
+
+        private fun initialiseerLiedje(track: Track, mediaPlayer: MediaPlayer){
+            try {
+                if(mediaPlayer.isPlaying){
+                    mediaPlayer.reset()
+                    mediaPlayer.setVolume( 1.0f,1.0f)
+                }
+                mediaPlayer.setDataSource(track.preview)
+                mediaPlayer.prepare()
+            } catch (e: Exception) {
+                print(e)
+            }
+        }
+
+        private fun inversePlaying(artiestenFragment: ArtiestenFragment, mediaPlayer: MediaPlayer){
             if(mediaPlayer.isPlaying){
                 mediaPlayer.pause()
                 binding.liedjeBalk.setBackgroundColor(Color.WHITE)
@@ -71,6 +132,7 @@ class TrackItemAdapter(
                 binding.titel.setTextColor(Color.DKGRAY)
                 binding.imageViewPlayPause.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp)
                 binding.imageViewPlayPause.backgroundTintList = ContextCompat.getColorStateList(artiestenFragment.context!!, R.color.gray)
+                binding.imageViewPlayPauseCircle.backgroundTintList = ContextCompat.getColorStateList(artiestenFragment.context!!, R.color.gray)
             } else{
                 mediaPlayer.start()
                 binding.liedjeBalk.setBackgroundColor(Color.parseColor("#991a1a"))
@@ -79,19 +141,7 @@ class TrackItemAdapter(
                 binding.titel.setTextColor(Color.WHITE)
                 binding.imageViewPlayPause.setBackgroundResource(R.drawable.ic_pause_black_24dp)
                 binding.imageViewPlayPause.backgroundTintList = ContextCompat.getColorStateList(artiestenFragment.context!!, R.color.white)
-            }
-        }
-
-
-        private fun initialiseerLiedje(track: Track, mediaPlayer: MediaPlayer){
-            try {
-                if(mediaPlayer.isPlaying){
-                    mediaPlayer.reset()
-                }
-                mediaPlayer.setDataSource(track.preview)
-                mediaPlayer.prepare()
-            } catch (e: Exception) {
-                print(e)
+                binding.imageViewPlayPauseCircle.backgroundTintList = ContextCompat.getColorStateList(artiestenFragment.context!!, R.color.white)
             }
         }
 

@@ -16,14 +16,15 @@
         tools:context=".MainActivity">
 
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+
+            <com.dinuscxj.refresh.RecyclerRefreshLayout
+                android:id="@+id/swipe_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listArtiesten"
@@ -52,7 +53,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </com.dinuscxj.refresh.RecyclerRefreshLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

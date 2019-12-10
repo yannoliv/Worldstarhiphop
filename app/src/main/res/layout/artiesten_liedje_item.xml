@@ -51,19 +51,42 @@
             android:text="80k"
             tools:text="80K"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageViewPlayPause"
+            app:layout_constraintEnd_toStartOf="@+id/relativeLayout"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageViewPlayPause"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_marginEnd="24dp"
-            android:background="@drawable/ic_play_arrow_black_24dp"
-            android:backgroundTint="@android:color/darker_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" >
+
+            <ImageView
+                android:id="@+id/imageViewPlayPause"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_margin="4dp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_play_arrow_black_24dp"
+                android:backgroundTint="@android:color/darker_gray">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/imageViewPlayPauseCircle"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:tint="@android:color/darker_gray"
+                android:src="@drawable/cicle_outline">
+
+
+            </ImageView>
+
+        </RelativeLayout>
+
 
 
 

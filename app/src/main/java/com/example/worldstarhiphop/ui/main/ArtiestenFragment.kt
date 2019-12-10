@@ -1,5 +1,6 @@
 package com.example.worldstarhiphop.ui.main
 
+import android.graphics.Color
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import androidx.lifecycle.ViewModelProviders
@@ -12,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 
 import com.example.worldstarhiphop.databinding.ArtiestenFragmentBinding
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.dinuscxj.refresh.RecyclerRefreshLayout
 import com.example.worldstarhiphop.R
 
 
@@ -24,10 +26,6 @@ class ArtiestenFragment : Fragment() {
 
     private val viewModel: ArtiestenViewModel by lazy {
         ViewModelProviders.of(this).get(ArtiestenViewModel::class.java)
-    }
-
-    private val viewModelArtistGridItem: ArtistGridItemViewModel by lazy {
-        ViewModelProviders.of(this).get(ArtistGridItemViewModel::class.java)
     }
 
     companion object {
@@ -66,10 +64,11 @@ class ArtiestenFragment : Fragment() {
 
     fun initialiseerSwipeRefreshLayout(){
         var mSwipeRefreshLayout = binding.swipeContainer
-        mSwipeRefreshLayout.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener{
-            // Artiesten updaten somehow
+        mSwipeRefreshLayout.setNestedScrollingEnabled(true);
+
+        mSwipeRefreshLayout.setOnRefreshListener(RecyclerRefreshLayout.OnRefreshListener{
             viewModel.getArtiesten()
-            mSwipeRefreshLayout.isRefreshing = false
+            mSwipeRefreshLayout.setRefreshing(false)
         })
     }
 
