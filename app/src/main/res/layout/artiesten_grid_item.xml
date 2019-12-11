@@ -16,6 +16,7 @@
 
 
     <LinearLayout
+        android:id="@+id/artiest_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -92,6 +93,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:listitem="@layout/artiesten_liedje_item"
+            android:background="@android:color/white"
             app:listLiedjeData="@{viewModel.tracks}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             tools:itemCount="5"/>
