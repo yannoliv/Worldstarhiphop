@@ -47,27 +47,6 @@ class ArtistItemAdapter(
     override fun onBindViewHolder(holder: ArtistViewHolder, position: Int) {
         val artist = getItem(position)
         holder.bind(artist, artiestenFragment, mediaPlayer)
-
-        setAnimation(holder.linearLayout!!, position)
-    }
-
-    private fun setAnimation(itemView: View, i: Int) {
-        var i = i
-        if (!on_attach) {
-            i = -1
-        }
-        val isNotFirstItem = i == -1
-        i++
-        itemView.alpha = 0f
-        val animatorSet = AnimatorSet()
-        val animator = ObjectAnimator.ofFloat(itemView, "alpha", 0f, 0.5f, 1.0f)
-        val animatorTranslateY = ObjectAnimator.ofFloat(itemView, "translationY", -400f, 0f)
-        val animatorAlpha = ObjectAnimator.ofFloat(itemView, "alpha", 1f)
-        ObjectAnimator.ofFloat(itemView, "alpha", 0f).start()
-        animator.startDelay = if (isNotFirstItem) DURATION / 2 else i * DURATION / 3
-        animator.duration = 500
-        animatorSet.playTogether(animatorTranslateY, animatorAlpha);
-        animator.start()
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<Artist>() {
@@ -83,12 +62,8 @@ class ArtistItemAdapter(
     class ArtistViewHolder(private var binding: ArtiestenGridItemBinding, viewType:Int):
         RecyclerView.ViewHolder(binding.root) {
 
-        var linearLayout: LinearLayout? = null
-
         fun bind(artist: Artist, artiestenFragment: ArtiestenFragment, mediaPlayer: MediaPlayer) {
-
             binding.artist = artist
-            linearLayout = binding.artiestLinearLayout
 
             binding.recyclerLiedjeItem.adapter = TrackItemAdapter(artiestenFragment, mediaPlayer)
 
@@ -101,40 +76,30 @@ class ArtistItemAdapter(
 
             binding.whitebarArtist.setOnClickListener(View.OnClickListener {
 
-
                 if(binding.recyclerLiedjeItem.visibility == View.GONE){
                     var rotateHalf = AnimationUtils.loadAnimation(
                         artiestenFragment.context,
                         R.anim.semi_clockwise_rotation
                     )
-
                     rotateHalf.setInterpolator(LinearInterpolator())
                     rotateHalf.setFillAfter(true)
-
                     binding.pijltje.startAnimation(rotateHalf)
 
-                    // Liedjes openen
+                    // Visible maken
                     binding.streepBovenRecyclerView.visibility = View.VISIBLE
-
-                    // Recyclerview animeren
-                    binding.recyclerLiedjeItem.setVisibility(View.VISIBLE)
+                    binding.recyclerLiedjeItem.visibility = View.VISIBLE
 
                 } else {
                     var rotateHalf = AnimationUtils.loadAnimation(
                         artiestenFragment.context,
                         R.anim.second_semi_clockwise_rotation
                     )
-
                     rotateHalf.setInterpolator(LinearInterpolator())
                     rotateHalf.setFillAfter(true)
-
                     binding.pijltje.startAnimation(rotateHalf)
 
-                    // Liedjes sluiten
+                    // Visible uit
                     binding.streepBovenRecyclerView.visibility = View.GONE
-
-                    // Recyclerview animeren
-
                     binding.recyclerLiedjeItem.visibility = View.GONE
                 }
             })
