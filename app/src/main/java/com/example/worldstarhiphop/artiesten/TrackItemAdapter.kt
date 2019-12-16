@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.worldstarhiphop.R
-import com.example.worldstarhiphop.databinding.ArtiestenLiedjeItemBinding
+import com.example.worldstarhiphop.databinding.ArtistLiedjeItemBinding
 import com.example.worldstarhiphop.network.track.Track
 
 
@@ -29,7 +29,7 @@ class TrackItemAdapter(
         viewType: Int
     ): TrackViewHolder {
         return TrackViewHolder(
-            ArtiestenLiedjeItemBinding.inflate(LayoutInflater.from(parent.context))
+            ArtistLiedjeItemBinding.inflate(LayoutInflater.from(parent.context))
         )
     }
 
@@ -48,7 +48,7 @@ class TrackItemAdapter(
         }
     }
 
-    class TrackViewHolder(private var binding: ArtiestenLiedjeItemBinding):
+    class TrackViewHolder(private var binding: ArtistLiedjeItemBinding):
         RecyclerView.ViewHolder(binding.root) {
 
 

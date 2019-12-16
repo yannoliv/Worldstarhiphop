@@ -1,6 +1,7 @@
 package com.example.worldstarhiphop.network
 
 import com.example.worldstarhiphop.network.artist.ArtistListObject
+import com.example.worldstarhiphop.network.radio.RadiosListObject
 import com.example.worldstarhiphop.network.track.TrackListObject
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
@@ -24,15 +25,18 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface DeezerApiService {
+    /** Artist Fragment **/
+    // Alle artiesten uit het genre Hip Hop
     @GET("genre/116/artists")
     fun getArtiesten(): Deferred<ArtistListObject>
 
+    // Alle artiesten uit het genre Hip Hop, hun top 5 liedjes
     @GET("artist/{id}/top?limit=5")
     fun getTracksVanArtiest(@Path("id") id:Int): Deferred<TrackListObject>
-/*
-    @GET("artist/13/top?limit=5")
-    fun getTracksVanArtiest(): Deferred<TrackListObject>
-*/
+
+    /** Album Fragment **/
+    @GET("https://api.deezer.com/genre/116/radios")
+    fun getRadios(): Deferred<RadiosListObject>
 }
 
 

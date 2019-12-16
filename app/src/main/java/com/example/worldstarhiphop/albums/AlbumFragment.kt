@@ -43,8 +43,8 @@ class AlbumFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(AlbumViewModel::class.java)
 
+        viewModel = ViewModelProviders.of(this).get(AlbumViewModel::class.java)
         initialiseerAlbum()
 
         binding.btnPlay.setOnClickListener {
@@ -53,7 +53,7 @@ class AlbumFragment : Fragment() {
 
     }
 
-    fun initialiseerAlbum() {
+    private fun initialiseerAlbum() {
         Glide.with(this)
             .load(albumCover)
             .thumbnail(
@@ -78,13 +78,13 @@ class AlbumFragment : Fragment() {
         }
     }
 
-    fun startPlaying(){
+    private fun startPlaying(){
         if(mediaPlayer.isPlaying){
             mediaPlayer.pause()
-            binding.btnPlay.setText("Hervat")
+            binding.btnPlay.text = "Hervat"
         } else{
             mediaPlayer.start()
-            binding.btnPlay.setText("Pauzeer")
+            binding.btnPlay.text = "Pauzeer"
         }
     }
 

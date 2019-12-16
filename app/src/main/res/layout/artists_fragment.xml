@@ -40,7 +40,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:listData="@{viewModel.artists}"
                 tools:itemCount="16"
-                tools:listitem="@layout/artiesten_grid_item" />
+                tools:listitem="@layout/artist_grid_item" />
 
             <ImageView
                 android:id="@+id/status_image"

@@ -1,16 +1,16 @@
-package com.example.worldstarhiphop.artiesten
+package com.example.worldstarhiphop.radios
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.worldstarhiphop.network.artist.Artist
 import com.example.worldstarhiphop.network.DeezerAPI
+import com.example.worldstarhiphop.network.radio.Radio
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class ArtistViewModel : ViewModel() {
+class RadioViewModel : ViewModel() {
 
     enum class DeezerApiStatus { LOADING, ERROR, DONE }
 
@@ -19,10 +19,10 @@ class ArtistViewModel : ViewModel() {
     val status: LiveData<DeezerApiStatus>
         get() = _status
 
-    private var _artists = MutableLiveData<List<Artist>>()
+    private var _radios = MutableLiveData<List<Radio>>()
 
-    val artists: LiveData<List<Artist>>
-        get() = _artists
+    val radios: LiveData<List<Radio>>
+        get() = _radios
 
 
     // [H8 - Exercise 9]
@@ -30,25 +30,25 @@ class ArtistViewModel : ViewModel() {
     private val coroutineScope= CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init{
-        getArtists()
+        getRadios()
     }
 
     // Is public zodat we kunnen refreshen
-    fun getArtists(){
+    fun getRadios(){
 
         coroutineScope.launch{
-            val getPropertiesDeferred = DeezerAPI.retrofitService.getArtiesten()
+            val getPropertiesDeferred = DeezerAPI.retrofitService.getRadios()
             try{
                 _status.value =
                     DeezerApiStatus.LOADING
                 val resultaat = getPropertiesDeferred.await()
-                _artists.value = resultaat.data
+                _radios.value = resultaat.data
                 _status.value =
                     DeezerApiStatus.DONE
             }catch (t: Throwable){
                 _status.value =
                     DeezerApiStatus.ERROR
-                _artists.value = ArrayList()
+                _radios.value = ArrayList()
             }
         }
     }

@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.example.worldstarhiphop.artiesten.ArtistFragment
 import com.example.worldstarhiphop.albums.AlbumFragment
+import com.example.worldstarhiphop.radios.RadioFragment
 import com.google.android.material.tabs.TabLayout
 
 
@@ -33,12 +34,14 @@ class MainActivity : AppCompatActivity() {
     private fun setupTabIcons(){
         binding.tabs.getTabAt(0)!!.setIcon(R.drawable.ic_playlist_play_black_24dp)
         binding.tabs.getTabAt(1)!!.setIcon(R.drawable.ic_person_black_24dp)
+        binding.tabs.getTabAt(2)!!.setIcon(R.drawable.ic_radio_black_24dp)
     }
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(ArtistFragment(), "Artiesten")
         adapter.addFragment(AlbumFragment(), "Playlists")
+        adapter.addFragment(RadioFragment(), "Radio")
         viewPager.adapter = adapter
     }
 
@@ -48,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         private val mFragmentTitleList = ArrayList<String>()
 
         override fun getItem(position: Int): Fragment {
-            return mFragmentList.get(position)
+            return mFragmentList[position]
         }
 
         override fun getCount(): Int {
@@ -61,7 +64,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun getPageTitle(position: Int): CharSequence? {
-            return mFragmentTitleList.get(position)
+            return mFragmentTitleList[position]
         }
     }
 

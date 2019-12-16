@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.worldstarhiphop.databinding.ArtiestenGridItemBinding
 import com.example.worldstarhiphop.network.artist.Artist
 import androidx.lifecycle.ViewModelProviders
 import com.example.worldstarhiphop.R
 import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
+import com.example.worldstarhiphop.databinding.ArtistGridItemBinding
 
 
 class ArtistItemAdapter(
@@ -22,21 +22,18 @@ class ArtistItemAdapter(
     DiffCallback
 ) {
 
-    var artiestenFragment = artistFragmentInput
-    var mediaPlayer= mediaPlayerInput
+    private var artiestenFragment = artistFragmentInput
+    private var mediaPlayer= mediaPlayerInput
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ArtistViewHolder {
         return ArtistViewHolder(
-            ArtiestenGridItemBinding.inflate(LayoutInflater.from(parent.context)),
+            ArtistGridItemBinding.inflate(LayoutInflater.from(parent.context)),
             viewType
         )
     }
-
-    val DURATION:Long = 0
-    var on_attach = true;
 
     override fun onBindViewHolder(holder: ArtistViewHolder, position: Int) {
         val artist = getItem(position)
@@ -53,7 +50,7 @@ class ArtistItemAdapter(
         }
     }
 
-    class ArtistViewHolder(private var binding: ArtiestenGridItemBinding, viewType:Int):
+    class ArtistViewHolder(private var binding: ArtistGridItemBinding, viewType:Int):
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(artist: Artist, artistFragment: ArtistFragment, mediaPlayer: MediaPlayer) {
@@ -75,12 +72,12 @@ class ArtistItemAdapter(
             binding.whitebarArtist.setOnClickListener(View.OnClickListener {
 
                 if(binding.recyclerLiedjeItem.visibility == View.GONE){
-                    var rotateHalf = AnimationUtils.loadAnimation(
+                    val rotateHalf = AnimationUtils.loadAnimation(
                         artistFragment.context,
                         R.anim.semi_clockwise_rotation
                     )
-                    rotateHalf.setInterpolator(LinearInterpolator())
-                    rotateHalf.setFillAfter(true)
+                    rotateHalf.interpolator = LinearInterpolator()
+                    rotateHalf.fillAfter = true
                     binding.pijltje.startAnimation(rotateHalf)
 
                     // Visible maken
@@ -88,12 +85,12 @@ class ArtistItemAdapter(
                     binding.recyclerLiedjeItem.visibility = View.VISIBLE
 
                 } else {
-                    var rotateHalf = AnimationUtils.loadAnimation(
+                    val rotateHalf = AnimationUtils.loadAnimation(
                         artistFragment.context,
                         R.anim.second_semi_clockwise_rotation
                     )
-                    rotateHalf.setInterpolator(LinearInterpolator())
-                    rotateHalf.setFillAfter(true)
+                    rotateHalf.interpolator = LinearInterpolator()
+                    rotateHalf.fillAfter = true
                     binding.pijltje.startAnimation(rotateHalf)
 
                     // Visible uit

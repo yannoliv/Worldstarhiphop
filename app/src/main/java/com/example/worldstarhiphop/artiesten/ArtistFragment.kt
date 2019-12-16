@@ -9,15 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-
-import com.example.worldstarhiphop.databinding.ArtiestenFragmentBinding
 import com.dinuscxj.refresh.RecyclerRefreshLayout
 import com.example.worldstarhiphop.R
+import com.example.worldstarhiphop.databinding.ArtistsFragmentBinding
 
 
 class ArtistFragment : Fragment() {
 
-    private lateinit var binding: ArtiestenFragmentBinding
+    private lateinit var binding: ArtistsFragmentBinding
     private var mediaPlayer: MediaPlayer = MediaPlayer()
     private val viewModel: ArtistViewModel by lazy {
         ViewModelProviders.of(this).get(ArtistViewModel::class.java)
@@ -32,7 +31,7 @@ class ArtistFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.artiesten_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.artists_fragment, container, false)
 
         /** Beginnen met mediaplayer te initialiseren **/
         mediaPlayer.apply {
@@ -59,7 +58,7 @@ class ArtistFragment : Fragment() {
         mSwipeRefreshLayout.isNestedScrollingEnabled = true
 
         mSwipeRefreshLayout.setOnRefreshListener(RecyclerRefreshLayout.OnRefreshListener{
-            viewModel.getArtiesten()
+            viewModel.getArtists()
             mSwipeRefreshLayout.setRefreshing(false)
         })
     }
