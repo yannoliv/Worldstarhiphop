@@ -6,7 +6,7 @@
     <data>
         <variable
             name="track"
-            type="com.example.worldstarhiphop.network.Track" />
+            type="com.example.worldstarhiphop.network.track.Track" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

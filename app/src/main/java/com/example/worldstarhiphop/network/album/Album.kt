@@ -1,4 +1,4 @@
-package com.example.worldstarhiphop.network
+package com.example.worldstarhiphop.network.album
 
 data class Album(
     val id: Int,

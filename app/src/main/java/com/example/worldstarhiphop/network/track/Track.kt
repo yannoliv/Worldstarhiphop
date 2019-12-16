@@ -1,4 +1,6 @@
-package com.example.worldstarhiphop.network
+package com.example.worldstarhiphop.network.track
+
+import com.example.worldstarhiphop.network.album.Album
 
 data class Track(
     val id: Int,

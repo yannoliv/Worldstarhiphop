@@ -1,4 +1,4 @@
-package com.example.worldstarhiphop.ui.main
+package com.example.worldstarhiphop.artiesten
 
 import android.media.MediaPlayer
 import android.view.LayoutInflater
@@ -8,37 +8,31 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.worldstarhiphop.databinding.ArtiestenGridItemBinding
-import com.example.worldstarhiphop.network.Artist
+import com.example.worldstarhiphop.network.artist.Artist
 import androidx.lifecycle.ViewModelProviders
 import com.example.worldstarhiphop.R
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
-import android.opengl.ETC1.getHeight
-import android.view.animation.Animation
-import android.view.animation.TranslateAnimation
-import android.R.attr.start
-import android.animation.ObjectAnimator
-import android.animation.AnimatorSet
-import android.widget.LinearLayout
-
-
 
 
 class ArtistItemAdapter(
-    artiestenFragmentInput: ArtiestenFragment,
+    artistFragmentInput: ArtistFragment,
     mediaPlayerInput: MediaPlayer
-) : ListAdapter<Artist, ArtistItemAdapter.ArtistViewHolder>(DiffCallback) {
+) : ListAdapter<Artist, ArtistItemAdapter.ArtistViewHolder>(
+    DiffCallback
+) {
 
-    var artiestenFragment = artiestenFragmentInput
+    var artiestenFragment = artistFragmentInput
     var mediaPlayer= mediaPlayerInput
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ArtistViewHolder {
-        return ArtistViewHolder(ArtiestenGridItemBinding.inflate(LayoutInflater.from(parent.context)), viewType)
+        return ArtistViewHolder(
+            ArtiestenGridItemBinding.inflate(LayoutInflater.from(parent.context)),
+            viewType
+        )
     }
 
     val DURATION:Long = 0
@@ -62,14 +56,18 @@ class ArtistItemAdapter(
     class ArtistViewHolder(private var binding: ArtiestenGridItemBinding, viewType:Int):
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(artist: Artist, artiestenFragment: ArtiestenFragment, mediaPlayer: MediaPlayer) {
+        fun bind(artist: Artist, artistFragment: ArtistFragment, mediaPlayer: MediaPlayer) {
             binding.artist = artist
 
-            binding.recyclerLiedjeItem.adapter = TrackItemAdapter(artiestenFragment, mediaPlayer)
+            binding.recyclerLiedjeItem.adapter =
+                TrackItemAdapter(
+                    artistFragment,
+                    mediaPlayer
+                )
 
-            ViewModelProviders.of(artiestenFragment)
+            ViewModelProviders.of(artistFragment)
                 .get(ArtistGridItemViewModel::class.java).getTracksVanArtiest(artist.id)
-            binding.viewModel = ViewModelProviders.of(artiestenFragment)
+            binding.viewModel = ViewModelProviders.of(artistFragment)
                 .get(ArtistGridItemViewModel::class.java)
 
             // onclick listener voor de liedjes te openen.
@@ -78,7 +76,7 @@ class ArtistItemAdapter(
 
                 if(binding.recyclerLiedjeItem.visibility == View.GONE){
                     var rotateHalf = AnimationUtils.loadAnimation(
-                        artiestenFragment.context,
+                        artistFragment.context,
                         R.anim.semi_clockwise_rotation
                     )
                     rotateHalf.setInterpolator(LinearInterpolator())
@@ -91,7 +89,7 @@ class ArtistItemAdapter(
 
                 } else {
                     var rotateHalf = AnimationUtils.loadAnimation(
-                        artiestenFragment.context,
+                        artistFragment.context,
                         R.anim.second_semi_clockwise_rotation
                     )
                     rotateHalf.setInterpolator(LinearInterpolator())

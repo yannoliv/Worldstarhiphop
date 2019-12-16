@@ -1,4 +1,4 @@
-package com.example.worldstarhiphop.network
+package com.example.worldstarhiphop.network.track
 
 import com.squareup.moshi.Json
 

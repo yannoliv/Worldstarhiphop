@@ -1,20 +1,16 @@
-package com.example.worldstarhiphop.ui.main
+package com.example.worldstarhiphop.artiesten
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.worldstarhiphop.network.Artist
+import com.example.worldstarhiphop.network.artist.Artist
 import com.example.worldstarhiphop.network.DeezerAPI
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class ArtiestenViewModel : ViewModel() {
+class ArtistViewModel : ViewModel() {
 
     enum class DeezerApiStatus { LOADING, ERROR, DONE }
 
@@ -43,12 +39,15 @@ class ArtiestenViewModel : ViewModel() {
         coroutineScope.launch{
             var getPropertiesDeferred = DeezerAPI.retrofitService.getArtiesten()
             try{
-                _status.value = DeezerApiStatus.LOADING
+                _status.value =
+                    DeezerApiStatus.LOADING
                 var resultaat = getPropertiesDeferred.await()
                 _artists.value = resultaat.data
-                _status.value = DeezerApiStatus.DONE
+                _status.value =
+                    DeezerApiStatus.DONE
             }catch (t: Throwable){
-                _status.value = DeezerApiStatus.ERROR
+                _status.value =
+                    DeezerApiStatus.ERROR
                 _artists.value = ArrayList()
             }
         }

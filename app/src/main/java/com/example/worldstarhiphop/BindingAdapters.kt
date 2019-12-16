@@ -7,11 +7,11 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.worldstarhiphop.network.Artist
-import com.example.worldstarhiphop.network.Track
-import com.example.worldstarhiphop.ui.main.ArtiestenViewModel
-import com.example.worldstarhiphop.ui.main.TrackItemAdapter
-import com.example.worldstarhiphop.ui.main.ArtistItemAdapter
+import com.example.worldstarhiphop.network.artist.Artist
+import com.example.worldstarhiphop.network.track.Track
+import com.example.worldstarhiphop.artiesten.ArtistViewModel
+import com.example.worldstarhiphop.artiesten.TrackItemAdapter
+import com.example.worldstarhiphop.artiesten.ArtistItemAdapter
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?){
@@ -40,17 +40,17 @@ fun bindRecyclerViewLiedje(recyclerView: RecyclerView, data: List<Track>?){
 }
 
 @BindingAdapter("deezerApiStatus")
-fun bindStatus(statusImageView: ImageView, status: ArtiestenViewModel.DeezerApiStatus?) {
+fun bindStatus(statusImageView: ImageView, status: ArtistViewModel.DeezerApiStatus?) {
     when (status) {
-        ArtiestenViewModel.DeezerApiStatus.LOADING -> {
+        ArtistViewModel.DeezerApiStatus.LOADING -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.loading_animation)
         }
-        ArtiestenViewModel.DeezerApiStatus.ERROR -> {
+        ArtistViewModel.DeezerApiStatus.ERROR -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.ic_connection_error)
         }
-        ArtiestenViewModel.DeezerApiStatus.DONE -> {
+        ArtistViewModel.DeezerApiStatus.DONE -> {
             statusImageView.visibility = View.GONE
         }
     }

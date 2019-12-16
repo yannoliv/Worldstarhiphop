@@ -1,13 +1,10 @@
-package com.example.worldstarhiphop.ui.main
+package com.example.worldstarhiphop.artiesten
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.worldstarhiphop.network.Artist
 import com.example.worldstarhiphop.network.DeezerAPI
-import com.example.worldstarhiphop.network.Track
+import com.example.worldstarhiphop.network.track.Track
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -38,12 +35,15 @@ class ArtistGridItemViewModel : ViewModel() {
         coroutineScope.launch{
             var getPropertiesDeferred = DeezerAPI.retrofitService.getTracksVanArtiest(id)
             try{
-                _status.value = DeezerApiStatus.LOADING
+                _status.value =
+                    DeezerApiStatus.LOADING
                 var resultaat = getPropertiesDeferred.await()
                 _tracks.value = resultaat.data
-                _status.value = DeezerApiStatus.DONE
+                _status.value =
+                    DeezerApiStatus.DONE
             }catch (t: Throwable){
-                _status.value = DeezerApiStatus.ERROR
+                _status.value =
+                    DeezerApiStatus.ERROR
                 _tracks.value = ArrayList()
             }
         }

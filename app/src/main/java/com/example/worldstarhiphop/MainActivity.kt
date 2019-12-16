@@ -1,23 +1,15 @@
 package com.example.worldstarhiphop
 
-import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.worldstarhiphop.databinding.MainActivityBinding
 import androidx.viewpager.widget.ViewPager
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.view.Window
-import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import java.nio.file.Files.size
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.worldstarhiphop.ui.main.ArtiestenFragment
-import com.example.worldstarhiphop.ui.main.PlaylistsFragment
+import com.example.worldstarhiphop.artiesten.ArtistFragment
+import com.example.worldstarhiphop.albums.AlbumFragment
 import com.google.android.material.tabs.TabLayout
 
 
@@ -45,8 +37,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = ViewPagerAdapter(supportFragmentManager)
-        adapter.addFragment(ArtiestenFragment(), "Artiesten")
-        adapter.addFragment(PlaylistsFragment(), "Playlists")
+        adapter.addFragment(ArtistFragment(), "Artiesten")
+        adapter.addFragment(AlbumFragment(), "Playlists")
         viewPager.adapter = adapter
     }
 

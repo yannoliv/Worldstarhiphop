@@ -1,6 +1,5 @@
-package com.example.worldstarhiphop.ui.main
+package com.example.worldstarhiphop.artiesten
 
-import android.graphics.Color
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import androidx.lifecycle.ViewModelProviders
@@ -12,24 +11,21 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 
 import com.example.worldstarhiphop.databinding.ArtiestenFragmentBinding
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dinuscxj.refresh.RecyclerRefreshLayout
 import com.example.worldstarhiphop.R
 
 
-class ArtiestenFragment : Fragment() {
+class ArtistFragment : Fragment() {
 
     private lateinit var binding: ArtiestenFragmentBinding
-
     private var mediaPlayer: MediaPlayer = MediaPlayer()
-
-
-    private val viewModel: ArtiestenViewModel by lazy {
-        ViewModelProviders.of(this).get(ArtiestenViewModel::class.java)
+    private val viewModel: ArtistViewModel by lazy {
+        ViewModelProviders.of(this).get(ArtistViewModel::class.java)
     }
 
     companion object {
-        fun newInstance() = ArtiestenFragment()
+        fun newInstance() =
+            ArtistFragment()
     }
 
     override fun onCreateView(
@@ -38,6 +34,7 @@ class ArtiestenFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.artiesten_fragment, container, false)
 
+        /** Beginnen met mediaplayer te initialiseren **/
         mediaPlayer.apply {
             setAudioAttributes(
                 AudioAttributes.Builder()
@@ -47,10 +44,9 @@ class ArtiestenFragment : Fragment() {
             )
         }
 
-        binding.listArtiesten.adapter = ArtistItemAdapter(this, mediaPlayer)
-
-        binding.setLifecycleOwner(this)
-
+        // variabelen van ArtiestenFragment
+        binding.listArtiesten.adapter = ArtistItemAdapter(this,mediaPlayer)
+        binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
         initialiseerSwipeRefreshLayout()
@@ -58,13 +54,9 @@ class ArtiestenFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-    }
-
-    fun initialiseerSwipeRefreshLayout(){
-        var mSwipeRefreshLayout = binding.swipeContainer
-        mSwipeRefreshLayout.setNestedScrollingEnabled(true);
+    private fun initialiseerSwipeRefreshLayout(){
+        val mSwipeRefreshLayout = binding.swipeContainer
+        mSwipeRefreshLayout.isNestedScrollingEnabled = true
 
         mSwipeRefreshLayout.setOnRefreshListener(RecyclerRefreshLayout.OnRefreshListener{
             viewModel.getArtiesten()

@@ -1,4 +1,4 @@
-package com.example.worldstarhiphop.network
+package com.example.worldstarhiphop.network.track
 
 data class TrackArtist(
     val id: Int,

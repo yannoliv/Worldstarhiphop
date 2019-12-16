@@ -6,11 +6,11 @@
     <data>
         <variable
             name="artist"
-            type="com.example.worldstarhiphop.network.Artist" />
+            type="com.example.worldstarhiphop.network.artist.Artist" />
 
         <variable
             name="viewModel"
-            type="com.example.worldstarhiphop.ui.main.ArtistGridItemViewModel" />
+            type="com.example.worldstarhiphop.artiesten.ArtistGridItemViewModel" />
 
     </data>
 
