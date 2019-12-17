@@ -3,6 +3,7 @@ package com.example.worldstarhiphop.network
 import com.example.worldstarhiphop.network.artist.ArtistListObject
 import com.example.worldstarhiphop.network.radio.RadiosListObject
 import com.example.worldstarhiphop.network.track.TrackListObject
+import com.example.worldstarhiphop.network.track.TrackListRadio
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -34,9 +35,13 @@ interface DeezerApiService {
     @GET("artist/{id}/top?limit=5")
     fun getTracksVanArtiest(@Path("id") id:Int): Deferred<TrackListObject>
 
-    /** Album Fragment **/
-    @GET("https://api.deezer.com/genre/116/radios")
+    // Alle radio's van het genre Hip Hop
+    @GET("genre/116/radios")
     fun getRadios(): Deferred<RadiosListObject>
+
+    // Alle tracks van de radio die megegeven is.
+    @GET("radio/{id}/tracks")
+    fun getTracksVanRadio(@Path("id") id:Int): Deferred<TrackListRadio>
 }
 
 

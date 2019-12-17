@@ -56,4 +56,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$version_recyclerview"
     implementation "com.dinuscxj:recyclerrefreshlayout:2.0.5"
 
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+
 }

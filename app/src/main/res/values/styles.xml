@@ -2,11 +2,14 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+        <!-- Custom Styling -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/noto_sans_regular</item>
+        <!-- Transitions -->
+        <item name="android:windowExitTransition">@transition/main_exit</item>
+        <item name="android:windowReenterTransition">@transition/main_reenter</item>
     </style>
 
     <style name="AppTheme.Launcher">
@@ -21,7 +24,20 @@
     <style name="ArtistNameStyle">
         <item name="android:fontFamily">@font/noto_sans_regular</item>
         <item name="android:textColor">@android:color/black</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <!-- Radio Detail Activity -->
+    <style name="AppTheme.RadioDetail" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Custom Styling -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/noto_sans_regular</item>
+
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowEnterTransition">@transition/detail_enter</item>
     </style>
 
 </resources>

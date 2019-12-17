@@ -30,7 +30,7 @@ class RadioFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.radios_fragment, container, false)
 
         // variabelen van ArtiestenFragment
-        binding.listRadios.adapter = RadioItemAdapter();
+        binding.listRadios.adapter = RadioItemAdapter(this);
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 

@@ -1,5 +1,7 @@
 package com.example.worldstarhiphop.network.radio
 
+import com.example.worldstarhiphop.network.track.Track
+
 data class Radio(
     val id: Int,
     val title: String,
@@ -9,5 +11,6 @@ data class Radio(
     val picture_big: String,
     val picture_xl: String,
     val tracklist: String,
-    val type: String
+    val type: String,
+    var tracks: List<Track>?
 )

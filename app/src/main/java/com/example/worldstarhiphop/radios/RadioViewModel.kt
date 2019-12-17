@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.worldstarhiphop.network.DeezerAPI
 import com.example.worldstarhiphop.network.radio.Radio
+import com.example.worldstarhiphop.network.track.Track
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -43,14 +44,19 @@ class RadioViewModel : ViewModel() {
                     DeezerApiStatus.LOADING
                 val resultaat = getPropertiesDeferred.await()
                 _radios.value = resultaat.data
-                _status.value =
-                    DeezerApiStatus.DONE
+                _status.value = DeezerApiStatus.DONE
             }catch (t: Throwable){
                 _status.value =
                     DeezerApiStatus.ERROR
                 _radios.value = ArrayList()
             }
         }
+    }
+
+    suspend fun getTracksFromRadio(radioId: Int): List<Track>{
+        val getPropertiesDeferred = DeezerAPI.retrofitService.getTracksVanRadio(radioId)
+        val resultaat = getPropertiesDeferred.await()
+        return resultaat.data
     }
 
     override fun onCleared() {

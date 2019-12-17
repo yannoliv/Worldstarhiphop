@@ -15,7 +15,7 @@ data class Track(
     val explicit_content_lyrics: Int,
     val explicit_content_cover: Int,
     val preview: String,
-    val contributors: List<Contributor>,
+    val contributors: List<Contributor>?,
     val artist: TrackArtist,
     val album: Album,
     val type: String

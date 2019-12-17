@@ -9,9 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 
 import android.media.MediaPlayer
+import android.widget.TextView
+import androidx.transition.Explode
+import androidx.transition.Fade
+import androidx.transition.TransitionManager
 import com.example.worldstarhiphop.databinding.PlaylistsFragmentBinding
 import com.example.worldstarhiphop.databinding.PlaylistsFragmentBinding.inflate
 import com.bumptech.glide.Glide
+import com.example.worldstarhiphop.R
 
 
 class AlbumFragment : Fragment() {
@@ -106,5 +111,13 @@ try{
         } catch (e: Exception){
             print(e)
         }
+
+                    val labelText = TextView(context).apply {
+            text = "Label"
+            id = R.id.text
+        }
+            val explode: Explode = Explode()
+            //TransitionManager.beginDelayedTransition(binding.albumLayout, explode)
+            //binding.albumLayout.addView(labelText)
 
  */
