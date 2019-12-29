@@ -5,25 +5,27 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.worldstarhiphop.network.DeezerAPI
 import com.example.worldstarhiphop.network.radio.Radio
+import com.example.worldstarhiphop.network.track.RadioTrack
 import com.example.worldstarhiphop.network.track.Track
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class RadioViewModel : ViewModel() {
+class RadioViewModel(radioId: Int) : ViewModel() {
 
     enum class DeezerApiStatus { LOADING, ERROR, DONE }
 
-    private val _status = MutableLiveData<DeezerApiStatus>()
+    // TRACKS van een bepaalde radio
+    private val _statusTracksVanRadio = MutableLiveData<DeezerApiStatus>()
 
-    val status: LiveData<DeezerApiStatus>
-        get() = _status
+    val statusTracksVanRadio: LiveData<DeezerApiStatus>
+        get() = _statusTracksVanRadio
 
-    private var _radios = MutableLiveData<List<Radio>>()
+    private var _tracksVanRadio = MutableLiveData<List<RadioTrack>>()
 
-    val radios: LiveData<List<Radio>>
-        get() = _radios
+    val tracksVanRadio: LiveData<List<RadioTrack>>
+        get() = _tracksVanRadio
 
 
     // [H8 - Exercise 9]
@@ -31,32 +33,23 @@ class RadioViewModel : ViewModel() {
     private val coroutineScope= CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init{
-        getRadios()
+        getTracksFromRadio(radioId)
     }
 
-    // Is public zodat we kunnen refreshen
-    fun getRadios(){
+    fun getTracksFromRadio(radioId: Int){
 
         coroutineScope.launch{
-            val getPropertiesDeferred = DeezerAPI.retrofitService.getRadios()
+            val getPropertiesDeferred = DeezerAPI.retrofitService.getTracksVanRadio(radioId)
             try{
-                _status.value =
-                    DeezerApiStatus.LOADING
+                _statusTracksVanRadio.value = DeezerApiStatus.LOADING
                 val resultaat = getPropertiesDeferred.await()
-                _radios.value = resultaat.data
-                _status.value = DeezerApiStatus.DONE
+                _tracksVanRadio.value = resultaat.data
+                _statusTracksVanRadio.value = DeezerApiStatus.DONE
             }catch (t: Throwable){
-                _status.value =
-                    DeezerApiStatus.ERROR
-                _radios.value = ArrayList()
+                _statusTracksVanRadio.value = DeezerApiStatus.ERROR
+                _tracksVanRadio.value = ArrayList()
             }
         }
-    }
-
-    suspend fun getTracksFromRadio(radioId: Int): List<Track>{
-        val getPropertiesDeferred = DeezerAPI.retrofitService.getTracksVanRadio(radioId)
-        val resultaat = getPropertiesDeferred.await()
-        return resultaat.data
     }
 
     override fun onCleared() {

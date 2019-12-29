@@ -53,7 +53,6 @@ class RadioItemAdapter(radioFragmentInput: RadioFragment) : ListAdapter<Radio, R
         fun bind(radio: Radio, radioFragment: RadioFragment) {
             binding.radio = radio
 
-
             binding.radioImage.setOnClickListener(View.OnClickListener {
 
                 // Parse radio naar JSON

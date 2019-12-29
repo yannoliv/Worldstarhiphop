@@ -1,4 +1,4 @@
-package com.example.worldstarhiphop.artiesten
+package com.example.worldstarhiphop.artists
 
 import android.media.MediaPlayer
 import android.view.LayoutInflater
@@ -53,25 +53,25 @@ class ArtistItemAdapter(
     class ArtistViewHolder(private var binding: ArtistGridItemBinding, viewType:Int):
         RecyclerView.ViewHolder(binding.root) {
 
+        private lateinit var viewModelFactory: ArtistGridItemViewModelFactory
+
         fun bind(artist: Artist, artistFragment: ArtistFragment, mediaPlayer: MediaPlayer) {
             binding.artist = artist
 
-            binding.recyclerLiedjeItem.adapter =
-                TrackItemAdapter(
-                    artistFragment,
-                    mediaPlayer
-                )
-
-            ViewModelProviders.of(artistFragment)
-                .get(ArtistGridItemViewModel::class.java).getTracksVanArtiest(artist.id)
-            binding.viewModel = ViewModelProviders.of(artistFragment)
-                .get(ArtistGridItemViewModel::class.java)
+            // track adapter, hier zitten momenteel nog de oude tracks in.
+            binding.recyclerLiedjeItem.adapter = TrackItemAdapter(mediaPlayer)
 
             // onclick listener voor de liedjes te openen.
-
             binding.whitebarArtist.setOnClickListener(View.OnClickListener {
 
                 if(binding.recyclerLiedjeItem.visibility == View.GONE){
+
+                    // artiest zijn tracks inladen als hij op de "witte bar" klikt
+                    viewModelFactory = ArtistGridItemViewModelFactory(artist.id)
+                    binding.viewModel = ViewModelProviders.of(artistFragment, viewModelFactory)
+                        .get(ArtistGridItemViewModel::class.java)
+
+                    // Pijltje animeren
                     val rotateHalf = AnimationUtils.loadAnimation(
                         artistFragment.context,
                         R.anim.semi_clockwise_rotation
@@ -80,11 +80,12 @@ class ArtistItemAdapter(
                     rotateHalf.fillAfter = true
                     binding.pijltje.startAnimation(rotateHalf)
 
-                    // Visible maken
+                    // "witte bar" zichtbaar maken
                     binding.streepBovenRecyclerView.visibility = View.VISIBLE
                     binding.recyclerLiedjeItem.visibility = View.VISIBLE
 
                 } else {
+                    // Pijltje animeren
                     val rotateHalf = AnimationUtils.loadAnimation(
                         artistFragment.context,
                         R.anim.second_semi_clockwise_rotation
@@ -93,7 +94,7 @@ class ArtistItemAdapter(
                     rotateHalf.fillAfter = true
                     binding.pijltje.startAnimation(rotateHalf)
 
-                    // Visible uit
+                    // "witte bar" onzichtbaar maken
                     binding.streepBovenRecyclerView.visibility = View.GONE
                     binding.recyclerLiedjeItem.visibility = View.GONE
                 }

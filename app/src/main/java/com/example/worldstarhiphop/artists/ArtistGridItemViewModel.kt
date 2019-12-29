@@ -1,16 +1,16 @@
-package com.example.worldstarhiphop.artiesten
+package com.example.worldstarhiphop.artists
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.worldstarhiphop.network.artist.Artist
 import com.example.worldstarhiphop.network.DeezerAPI
+import com.example.worldstarhiphop.network.track.ArtistTrack
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class ArtistViewModel : ViewModel() {
+class ArtistGridItemViewModel(artistId: Int) : ViewModel() {
 
     enum class DeezerApiStatus { LOADING, ERROR, DONE }
 
@@ -19,36 +19,33 @@ class ArtistViewModel : ViewModel() {
     val status: LiveData<DeezerApiStatus>
         get() = _status
 
-    private var _artists = MutableLiveData<List<Artist>>()
+    private val _tracks= MutableLiveData<List<ArtistTrack>>()
 
-    val artists: LiveData<List<Artist>>
-        get() = _artists
+    val tracks: LiveData<List<ArtistTrack>>
+        get() = _tracks
 
 
     // [H8 - Exercise 9]
     private var viewModelJob= Job()
     private val coroutineScope= CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    init{
-        getArtists()
+    init {
+        getTracksVanArtiest(artistId)
     }
 
     // Is public zodat we kunnen refreshen
-    fun getArtists(){
+    fun getTracksVanArtiest(id: Int){
 
         coroutineScope.launch{
-            val getPropertiesDeferred = DeezerAPI.retrofitService.getArtiesten()
+            val getPropertiesDeferred = DeezerAPI.retrofitService.getTracksVanArtiest(id)
             try{
-                _status.value =
-                    DeezerApiStatus.LOADING
+                _status.value = DeezerApiStatus.LOADING
                 val resultaat = getPropertiesDeferred.await()
-                _artists.value = resultaat.data
-                _status.value =
-                    DeezerApiStatus.DONE
+                _tracks.value = resultaat.data
+                _status.value = DeezerApiStatus.DONE
             }catch (t: Throwable){
-                _status.value =
-                    DeezerApiStatus.ERROR
-                _artists.value = ArrayList()
+                _status.value = DeezerApiStatus.ERROR
+                _tracks.value = ArrayList()
             }
         }
     }

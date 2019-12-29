@@ -7,36 +7,67 @@
         <variable
             name="radio"
             type="com.example.worldstarhiphop.network.radio.Radio" />
+        <variable
+            name="viewModel"
+            type="com.example.worldstarhiphop.radios.RadioViewModel" />
     </data>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:scrollbars="vertical">
 
-        <ImageView
-            android:id="@+id/radioImage"
-            android:transitionName="@string/radio_image_transition"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:padding="0dp"
-            android:layout_margin="0dp"
-            android:background="@android:color/black"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="fitCenter"
-            app:imageUrl="@{radio.picture_big}"
-            tools:src="@drawable/post"/>
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textAlignment="center"
-            android:layout_margin="@dimen/medium_margin"
-            android:text="@{radio.title}"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold"
-            tools:text="Post malone radio"/>
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/radioImage"
+                android:transitionName="@string/radio_image_transition"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:padding="0dp"
+                android:layout_margin="0dp"
+                android:background="@android:color/black"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="fitCenter"
+                app:imageUrl="@{radio.picture_big}"
+                tools:src="@drawable/post"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textAlignment="center"
+                android:layout_margin="@dimen/medium_margin"
+                android:text="@{radio.title}"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                tools:text="Post malone radio"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/tracks"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:textColor="@android:color/black"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listTracks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:padding="0dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="1"
+                tools:itemCount="8"
+                tools:listitem="@layout/track_item" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 </layout>

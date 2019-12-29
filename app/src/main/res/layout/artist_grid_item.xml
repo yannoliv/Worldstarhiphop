@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.worldstarhiphop.artiesten.ArtistGridItemViewModel" />
+            type="com.example.worldstarhiphop.artists.ArtistGridItemViewModel" />
 
     </data>
 
@@ -92,7 +92,7 @@
             android:clipToPadding="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/artist_liedje_item"
+            tools:listitem="@layout/track_item"
             android:background="@android:color/white"
             app:listLiedjeData="@{viewModel.tracks}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"

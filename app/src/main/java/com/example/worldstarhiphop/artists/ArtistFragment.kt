@@ -1,4 +1,4 @@
-package com.example.worldstarhiphop.artiesten
+package com.example.worldstarhiphop.artists
 
 import android.media.AudioAttributes
 import android.media.MediaPlayer

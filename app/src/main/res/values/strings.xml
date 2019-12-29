@@ -12,4 +12,5 @@
     <string name="radio_cover">radio cover</string>
     <string name="radio_image_transition">radioImageTransition</string>
     <string name="radio_id">radioId</string>
+    <string name="tracks">Tracks</string>
 </resources>

@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.dinuscxj.refresh.RecyclerRefreshLayout
 import com.example.worldstarhiphop.R
-import com.example.worldstarhiphop.artiesten.ArtistItemAdapter
 import com.example.worldstarhiphop.databinding.RadiosFragmentBinding
 
 class RadioFragment : Fragment() {
@@ -19,8 +18,8 @@ class RadioFragment : Fragment() {
     }
 
     private lateinit var binding: RadiosFragmentBinding
-    private val viewModel: RadioViewModel by lazy {
-        ViewModelProviders.of(this).get(RadioViewModel::class.java)
+    private val viewModel: RadiosViewModel by lazy {
+        ViewModelProviders.of(this).get(RadiosViewModel::class.java)
     }
 
     override fun onCreateView(

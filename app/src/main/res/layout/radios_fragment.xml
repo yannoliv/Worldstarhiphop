@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.worldstarhiphop.radios.RadioViewModel" />
+            type="com.example.worldstarhiphop.radios.RadiosViewModel" />
     </data>
 
     <FrameLayout

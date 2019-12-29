@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.worldstarhiphop.network.artist.Artist
-import com.example.worldstarhiphop.network.track.Track
-import com.example.worldstarhiphop.artiesten.ArtistViewModel
-import com.example.worldstarhiphop.artiesten.TrackItemAdapter
-import com.example.worldstarhiphop.artiesten.ArtistItemAdapter
+import com.example.worldstarhiphop.artists.ArtistViewModel
+import com.example.worldstarhiphop.artists.TrackItemAdapter
+import com.example.worldstarhiphop.artists.ArtistItemAdapter
 import com.example.worldstarhiphop.network.radio.Radio
+import com.example.worldstarhiphop.network.track.Track
 import com.example.worldstarhiphop.radios.RadioItemAdapter
-import com.example.worldstarhiphop.radios.RadioViewModel
+import com.example.worldstarhiphop.radios.RadiosViewModel
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?){
@@ -37,6 +37,7 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Artist>?) {
     adapter.submitList(data)
 }
 
+/** TODO adapter ontvangt een lege lijst van tracks, oplossen!! **/
 @BindingAdapter("listLiedjeData")
 fun bindRecyclerViewLiedje(recyclerView: RecyclerView, data: List<Track>?){
     val adapter = recyclerView.adapter as TrackItemAdapter
@@ -69,17 +70,17 @@ fun bindRadioRecyclerView(recyclerView: RecyclerView, data: List<Radio>?) {
 }
 
 @BindingAdapter("deezerApiStatusRadio")
-fun bindRadioStatus(statusImageView: ImageView, status: RadioViewModel.DeezerApiStatus?) {
+fun bindRadioStatus(statusImageView: ImageView, status: RadiosViewModel.DeezerApiStatus?) {
     when (status) {
-        RadioViewModel.DeezerApiStatus.LOADING -> {
+        RadiosViewModel.DeezerApiStatus.LOADING -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.loading_animation)
         }
-        RadioViewModel.DeezerApiStatus.ERROR -> {
+        RadiosViewModel.DeezerApiStatus.ERROR -> {
             statusImageView.visibility = View.VISIBLE
             statusImageView.setImageResource(R.drawable.ic_connection_error)
         }
-        RadioViewModel.DeezerApiStatus.DONE -> {
+        RadiosViewModel.DeezerApiStatus.DONE -> {
             statusImageView.visibility = View.GONE
         }
     }

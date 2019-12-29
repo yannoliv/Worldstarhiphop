@@ -2,18 +2,13 @@ package com.example.worldstarhiphop
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import com.example.worldstarhiphop.databinding.MainActivityBinding
 import androidx.viewpager.widget.ViewPager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.transition.Fade
-import androidx.transition.TransitionManager
-import com.example.worldstarhiphop.artiesten.ArtistFragment
+import com.example.worldstarhiphop.artists.ArtistFragment
 import com.example.worldstarhiphop.albums.AlbumFragment
 import com.example.worldstarhiphop.radios.RadioFragment
 import com.google.android.material.tabs.TabLayout
