@@ -11,7 +11,6 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/liedjeBalk"
-        android:background="@drawable/button_ripple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true"
@@ -26,7 +25,7 @@
             android:text="@{String.valueOf(track.rank)}"
             tools:text="1"
             android:layout_marginStart="24dp"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/darkGray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +38,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{track.title_short}"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/darkGray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/nummer"
             app:layout_constraintTop_toTopOf="parent"
@@ -54,7 +53,7 @@
             android:layout_marginEnd="8dp"
             android:text="80k"
             tools:text="80K"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/darkGray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/relativeLayout"
             app:layout_constraintTop_toTopOf="parent" />
@@ -75,8 +74,8 @@
                 android:layout_height="16dp"
                 android:layout_margin="4dp"
                 android:layout_gravity="center"
-                android:background="@drawable/ic_play_arrow_black_24dp"
-                android:backgroundTint="@android:color/darker_gray">
+                android:src="@drawable/ic_play_arrow_black_24dp"
+                android:backgroundTint="@color/darkGray">
 
             </ImageView>
 
@@ -84,7 +83,7 @@
                 android:id="@+id/imageViewPlayPauseCircle"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:tint="@android:color/darker_gray"
+                android:tint="@color/darkGray"
                 android:src="@drawable/cicle_outline">
 
 

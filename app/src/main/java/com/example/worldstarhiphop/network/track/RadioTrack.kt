@@ -11,7 +11,7 @@ data class RadioTrack(
     override val title_version:String,
     override val link: String,
     override val duration: Int,
-    override val rank: Int,
+    override var rank: Int,
     override val explicit_lyrics: Boolean,
     override val explicit_content_lyrics: Int,
     override val explicit_content_cover: Int,

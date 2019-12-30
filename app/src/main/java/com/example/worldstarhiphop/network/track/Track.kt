@@ -10,7 +10,7 @@ interface Track {
     val title_version:String
     val link: String
     val duration: Int
-    val rank: Int
+    var rank: Int
     val explicit_lyrics: Boolean
     val explicit_content_lyrics: Int
     val explicit_content_cover: Int
