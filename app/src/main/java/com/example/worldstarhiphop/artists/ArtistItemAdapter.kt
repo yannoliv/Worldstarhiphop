@@ -1,6 +1,7 @@
 package com.example.worldstarhiphop.artists
 
 import android.media.MediaPlayer
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,23 +54,35 @@ class ArtistItemAdapter(
     class ArtistViewHolder(private var binding: ArtistGridItemBinding, viewType:Int):
         RecyclerView.ViewHolder(binding.root) {
 
-        private lateinit var viewModelFactory: ArtistGridItemViewModelFactory
+        private lateinit var viewModel: ArtistGridItemViewModel
 
         fun bind(artist: Artist, artistFragment: ArtistFragment, mediaPlayer: MediaPlayer) {
             binding.artist = artist
 
-            // track adapter, hier zitten momenteel nog de oude tracks in.
             binding.recyclerLiedjeItem.adapter = TrackItemAdapter(mediaPlayer)
+
+            // Viewmodel initialiseren
+            viewModel = ViewModelProviders.of(artistFragment)
+                .get(ArtistGridItemViewModel::class.java)
+            binding.viewModel = viewModel
 
             // onclick listener voor de liedjes te openen.
             binding.whitebarArtist.setOnClickListener(View.OnClickListener {
 
                 if(binding.recyclerLiedjeItem.visibility == View.GONE){
 
-                    // artiest zijn tracks inladen als hij op de "witte bar" klikt
-                    viewModelFactory = ArtistGridItemViewModelFactory(artist.id)
-                    binding.viewModel = ViewModelProviders.of(artistFragment, viewModelFactory)
-                        .get(ArtistGridItemViewModel::class.java)
+                    viewModel.getTracksVanArtiest(artist.id)
+
+                    /** TODO: async problemen oplossen **/
+                    Handler().postDelayed(
+                        {
+                            // artiest zijn tracks inladen als hij op de "witte bar" klikt
+                            val adapter = binding.recyclerLiedjeItem.adapter as TrackItemAdapter
+                            adapter.submitList(viewModel.tracks.value)
+                            binding.recyclerLiedjeItem.adapter = adapter
+                        },
+                        500
+                    )
 
                     // Pijltje animeren
                     val rotateHalf = AnimationUtils.loadAnimation(

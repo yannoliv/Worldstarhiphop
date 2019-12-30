@@ -7,12 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.example.worldstarhiphop.R
-import com.example.worldstarhiphop.artists.ArtistGridItemViewModel
-import com.example.worldstarhiphop.artists.ArtistGridItemViewModelFactory
 import com.example.worldstarhiphop.artists.TrackItemAdapter
 import com.example.worldstarhiphop.databinding.RadioDetailBinding
 import com.example.worldstarhiphop.network.radio.Radio
-import com.example.worldstarhiphop.network.track.Track
 import com.google.gson.GsonBuilder
 
 
@@ -43,6 +40,7 @@ class RadioDetailActivity() : AppCompatActivity() {
             .get(RadioViewModel::class.java)
         binding.viewModel = viewModel
 
+        /** TODO: async problemen oplossen **/
         Handler().postDelayed(
             {
                 // This method will be executed once the timer is over

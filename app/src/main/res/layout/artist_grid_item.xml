@@ -94,7 +94,6 @@
             android:layout_height="wrap_content"
             tools:listitem="@layout/track_item"
             android:background="@android:color/white"
-            app:listLiedjeData="@{viewModel.tracks}"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             tools:itemCount="5"/>
 

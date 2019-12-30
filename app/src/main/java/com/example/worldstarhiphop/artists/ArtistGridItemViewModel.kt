@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class ArtistGridItemViewModel(artistId: Int) : ViewModel() {
+class ArtistGridItemViewModel : ViewModel() {
 
     enum class DeezerApiStatus { LOADING, ERROR, DONE }
 
@@ -28,10 +28,6 @@ class ArtistGridItemViewModel(artistId: Int) : ViewModel() {
     // [H8 - Exercise 9]
     private var viewModelJob= Job()
     private val coroutineScope= CoroutineScope(viewModelJob + Dispatchers.Main)
-
-    init {
-        getTracksVanArtiest(artistId)
-    }
 
     // Is public zodat we kunnen refreshen
     fun getTracksVanArtiest(id: Int){
