@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.worldstarhiphop.R
 import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
+import androidx.lifecycle.Observer
 import com.example.worldstarhiphop.databinding.ArtistGridItemBinding
 
 
@@ -73,16 +74,14 @@ class ArtistItemAdapter(
 
                     viewModel.getTracksVanArtiest(artist.id)
 
-                    /** TODO: async problemen oplossen **/
-                    Handler().postDelayed(
-                        {
+                    viewModel.tracks.observe(artistFragment, Observer {
+                        it?.let {
                             // artiest zijn tracks inladen als hij op de "witte bar" klikt
                             val adapter = binding.recyclerLiedjeItem.adapter as TrackItemAdapter
                             adapter.submitList(viewModel.tracks.value)
                             binding.recyclerLiedjeItem.adapter = adapter
-                        },
-                        500
-                    )
+                        }
+                    })
 
                     // Pijltje animeren
                     val rotateHalf = AnimationUtils.loadAnimation(

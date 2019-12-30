@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.worldstarhiphop.R
 import com.example.worldstarhiphop.artists.TrackItemAdapter
@@ -40,16 +41,14 @@ class RadioDetailActivity() : AppCompatActivity() {
             .get(RadioViewModel::class.java)
         binding.viewModel = viewModel
 
-        /** TODO: async problemen oplossen **/
-        Handler().postDelayed(
-            {
-                // This method will be executed once the timer is over
+        viewModel.tracksVanRadio.observe(this, Observer {
+            it?.let {
+                // artiest zijn tracks inladen als hij op de "witte bar" klikt
                 val adapter = binding.listTracks.adapter as TrackItemAdapter
                 adapter.submitList(viewModel.tracksVanRadio.value)
                 binding.listTracks.adapter = adapter
-            },
-            1000 // value in milliseconds
-        )
+            }
+        })
 
 
 
