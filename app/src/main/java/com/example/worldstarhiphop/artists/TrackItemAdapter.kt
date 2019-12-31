@@ -75,6 +75,9 @@ class TrackItemAdapter(
                 // Als liedje gedaan heeft met spelen:
                 mediaPlayer.setOnCompletionListener {
                     holder.unfocusTrack()
+                    // reset posities
+                    vPosition = -1
+                    mPosition = -1
                 }
 
                 vPosition = mPosition
