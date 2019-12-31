@@ -71,6 +71,12 @@ class TrackItemAdapter(
             if(mPosition != position || mPosition == position && !mediaPlayer.isPlaying){
                 holder.initialiseerLiedje(track, mediaPlayer)
                 mediaPlayer.start()
+
+                // Als liedje gedaan heeft met spelen:
+                mediaPlayer.setOnCompletionListener {
+                    holder.unfocusTrack()
+                }
+
                 vPosition = mPosition
                 mPosition = position
                 notifyDataSetChanged();
@@ -79,7 +85,7 @@ class TrackItemAdapter(
 
 
         // Klik op de pauze knop van het liedje
-        holder.binding.imageViewPlayPause.setOnClickListener(View.OnClickListener {
+        holder.binding.relativeLayout.setOnClickListener(View.OnClickListener {
             if(mPosition == position){
                 if(mediaPlayer.isPlaying){
                     mediaPlayer.pause()
@@ -106,6 +112,10 @@ class TrackItemAdapter(
 
         })
 
+        // favoriete track
+        holder.binding.favoriteTrack.setOnClickListener(View.OnClickListener{
+
+        })
 
         holder.bind(track)
     }
@@ -134,7 +144,7 @@ class TrackItemAdapter(
             binding.imageViewPlayPause.setImageResource(R.drawable.ic_pause_black_24dp)
 
             objectAnimatorFunctie(binding.liedjeBalk, "backgroundColor", Color.WHITE, Color.parseColor("#991a1a"))
-            objectAnimatorFunctie(binding.aantalKijkers, "textColor", Color.DKGRAY, Color.WHITE)
+            objectAnimatorFunctie(binding.favoriteTrack, "colorFilter", Color.DKGRAY, Color.WHITE)
             objectAnimatorFunctie(binding.nummer, "textColor", Color.DKGRAY, Color.WHITE)
             objectAnimatorFunctie(binding.titel, "textColor", Color.DKGRAY, Color.WHITE)
             objectAnimatorFunctie(binding.imageViewPlayPause, "colorFilter", Color.DKGRAY, Color.WHITE)
@@ -145,7 +155,7 @@ class TrackItemAdapter(
             binding.imageViewPlayPause.setImageResource(R.drawable.ic_play_arrow_black_24dp)
 
             objectAnimatorFunctie(binding.liedjeBalk, "backgroundColor", Color.parseColor("#991a1a"), Color.WHITE)
-            objectAnimatorFunctie(binding.aantalKijkers, "textColor", Color.WHITE, Color.DKGRAY)
+            objectAnimatorFunctie(binding.favoriteTrack, "colorFilter", Color.WHITE, Color.DKGRAY)
             objectAnimatorFunctie(binding.nummer, "textColor", Color.WHITE, Color.DKGRAY)
             objectAnimatorFunctie(binding.titel, "textColor", Color.WHITE, Color.DKGRAY)
             objectAnimatorFunctie(binding.imageViewPlayPause, "colorFilter", Color.WHITE, Color.DKGRAY)
