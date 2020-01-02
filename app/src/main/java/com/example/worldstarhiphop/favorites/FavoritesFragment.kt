@@ -50,7 +50,7 @@ class FavoritesFragment : Fragment() {
 
         binding.favoriteTracksViewModel = favoriteTracksViewModel
 
-        binding.recyclerLiedjeItem.adapter = TrackItemAdapter(mediaPlayer,this.activity!!)
+        binding.recyclerLiedjeItem.adapter = TrackItemAdapter(mediaPlayer,this.activity!!, this)
 
     }
 

@@ -33,7 +33,7 @@ class RadioDetailActivity() : AppCompatActivity() {
         val gson = GsonBuilder().create()
         val radio: Radio = gson.fromJson(intent.extras!!.getString("geklikte_radio"), Radio::class.java)
 
-        binding.listTracks.adapter = TrackItemAdapter(mediaPlayer, this)
+        binding.listTracks.adapter = TrackItemAdapter(mediaPlayer, this, null)
         binding.radio = radio
 
         viewModelFactory = RadioViewModelFactory(radio.id)

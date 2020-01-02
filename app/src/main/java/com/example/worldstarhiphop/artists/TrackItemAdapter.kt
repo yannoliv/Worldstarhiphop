@@ -32,13 +32,15 @@ import com.example.worldstarhiphop.network.database.TrackDatabase
 
 class TrackItemAdapter(
     mediaPlayerInput: MediaPlayer,
-    fragmentInput: FragmentActivity
+    fragmentActivityInput: FragmentActivity,
+    fragmentInput: Fragment?
 ) : ListAdapter<Track, TrackItemAdapter.TrackViewHolder>(
     DiffCallback
 ) {
 
     private var mediaPlayer = mediaPlayerInput
-    private val fragmentActivity = fragmentInput
+    private val fragmentActivity = fragmentActivityInput
+    private val fragment = fragmentInput
     private lateinit var viewModel:FavoriteTracksViewModel
 
     // Onthouden wat de laatste positie was
@@ -140,7 +142,7 @@ class TrackItemAdapter(
         // favoriete track
         holder.binding.favoriteTrack.setOnClickListener(View.OnClickListener{
             // TODO dit fixen
-            if(fragmentActivity is Activity){
+            if(fragment is FavoritesFragment){
                 viewModel.remove(track)
             } else{
                 viewModel.insert(track)
