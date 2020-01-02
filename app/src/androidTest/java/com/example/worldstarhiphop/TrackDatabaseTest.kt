@@ -3,10 +3,14 @@ package com.example.worldstarhiphop
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.example.worldstarhiphop.network.album.Album
+import com.example.worldstarhiphop.network.artist.Artist
 import com.example.worldstarhiphop.network.database.TrackDatabase
 import com.example.worldstarhiphop.network.database.TrackDatabaseDao
 import com.example.worldstarhiphop.network.track.ArtistTrack
+import com.example.worldstarhiphop.network.track.Contributor
 import com.example.worldstarhiphop.network.track.Track
+import com.example.worldstarhiphop.network.track.TrackArtist
 import junit.framework.Assert.assertEquals
 import org.junit.After
 import org.junit.Before
@@ -38,11 +42,20 @@ class TrackDatabaseTest{
 
     @Test
    @Throws(Exception::class)
-    fun insertAndGetNight() {
-        //val track = ArtistTrack()
-        //trackDatabaseDao.insert(track)
-        //val tracks = trackDatabaseDao.getAllTracks()
-        //assertEquals(tracks?.value, -1)
+    fun insertAndGetTrack() {
+        // Track maken
+        val mockContributors: List<Contributor> = emptyList()
+        val artist: TrackArtist = TrackArtist(10,"yann","xxx")
+        val album: Album = Album(10,"titel","cover","xxx",
+            "xxx","xxx","xxx","tracklist","Album")
+        val track = ArtistTrack(200,true,"ff","fff","fff",
+            "",200,200,true,20,20,
+            "",mockContributors,artist,album,"")
+
+        // Track testen
+        trackDatabaseDao.insert(track)
+        val testTrack = trackDatabaseDao.get(200)
+        assertEquals(testTrack!!.title, "ff")
     }
 
 }

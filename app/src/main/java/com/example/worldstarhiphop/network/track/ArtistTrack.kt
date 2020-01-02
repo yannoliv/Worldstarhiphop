@@ -2,6 +2,7 @@ package com.example.worldstarhiphop.network.track
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.example.worldstarhiphop.network.album.Album
 
@@ -9,38 +10,44 @@ import com.example.worldstarhiphop.network.album.Album
 data class ArtistTrack(
     @PrimaryKey
     @ColumnInfo(name = "primary_key")
-    override val id: Int,
+    override var id: Int,
     @ColumnInfo(name = "readable")
-    override val readable:Boolean,
+    override var readable:Boolean,
     @ColumnInfo(name = "title")
-    override val title: String,
+    override var title: String,
     @ColumnInfo(name = "title_short")
-    override val title_short: String,
+    override var title_short: String,
     @ColumnInfo(name = "title_version")
-    override val title_version:String,
+    override var title_version:String,
     @ColumnInfo(name = "link")
-    override val link: String,
+    override var link: String,
     @ColumnInfo(name = "duration")
-    override val duration: Int,
+    override var duration: Int,
     @ColumnInfo(name = "rank")
     override var rank: Int,
     @ColumnInfo(name = "explicit_lyrics")
-    override val explicit_lyrics: Boolean,
+    override var explicit_lyrics: Boolean,
     @ColumnInfo(name = "explicit_content_lyrics")
-    override val explicit_content_lyrics: Int,
+    override var explicit_content_lyrics: Int,
     @ColumnInfo(name = "explicit_content_cover")
-    override val explicit_content_cover: Int,
+    override var explicit_content_cover: Int,
     @ColumnInfo(name = "preview")
-    override val preview: String,
-    @ColumnInfo(name = "contributors")
-    val contributors: List<Contributor>,
-    @ColumnInfo(name = "artist")
-    val artist: TrackArtist,
-    @ColumnInfo(name = "album")
-    override val album: Album,
+    override var preview: String,
+    @Ignore
+    var contributors: List<Contributor>? = emptyList(),
+    @Ignore
+    var artist: TrackArtist? = TrackArtist(0,"",""),
+    @Ignore
+    override var album: Album = Album(0,"","","","","","","",""),
     @ColumnInfo(name = "type")
-    override val type: String): Track
+    override var type: String
+): Track
 {
     @ColumnInfo(name = "isFavorite")
     var isFavorite: Boolean = false
+
+    constructor(): this(0,false,"","","","",0,
+        0,false,0,0,"",null,
+        null,Album(0,"","","","","","","",""),""
+        )
 }

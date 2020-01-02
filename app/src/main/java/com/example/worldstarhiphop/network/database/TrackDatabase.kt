@@ -4,9 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.worldstarhiphop.network.track.ArtistTrack
 import com.example.worldstarhiphop.network.track.Track
 
-@Database(entities = [Track::class], version = 1, exportSchema = false)
+@Database(entities = [ArtistTrack::class], version = 1, exportSchema = false)
 abstract class TrackDatabase: RoomDatabase() {
     abstract val trackDatabaseDao: TrackDatabaseDao
     companion object {
