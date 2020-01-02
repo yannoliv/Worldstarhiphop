@@ -37,9 +37,8 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Artist>?) {
     adapter.submitList(data)
 }
 
-/** TODO adapter ontvangt een lege lijst van tracks, oplossen!! **/
-@BindingAdapter("listLiedjeData")
-fun bindRecyclerViewLiedje(recyclerView: RecyclerView, data: List<Track>?){
+@BindingAdapter("listTrackData")
+fun bindRecyclerViewTrack(recyclerView: RecyclerView, data: List<Track>?){
     val adapter = recyclerView.adapter as TrackItemAdapter
     adapter.submitList(data)
 }

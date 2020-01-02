@@ -52,6 +52,28 @@ class TrackDatabaseTest{
         assertEquals(testTrack!!.title, "yann")
     }
 
+    @Test
+    @Throws(Exception::class)
+    fun insertAndDeleteTrack() {
+        // Track maken
+        val track = Track(200,"yann","abc.be",20,4,"abcde.be")
+        val track2 = Track(201,"axel","abc.be",20,4,"abcde.be")
+        val track3 = Track(202,"lore","abc.be",20,4,"abcde.be")
+        val track4 = Track(203,"joer","abc.be",20,4,"abcde.be")
+
+        // Track testen
+        trackDatabaseDao.insert(track)
+        trackDatabaseDao.insert(track2)
+        trackDatabaseDao.insert(track3)
+        trackDatabaseDao.insert(track4)
+        trackDatabaseDao.remove(200)
+
+        val tracks = trackDatabaseDao.getAllTracks()
+
+        assertEquals(tracks!!.count(), 3)
+    }
+
+
 }
 
 

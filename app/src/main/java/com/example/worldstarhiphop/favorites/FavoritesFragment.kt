@@ -8,13 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 
 import android.media.MediaPlayer
+import android.util.Log
+import com.example.worldstarhiphop.artists.TrackItemAdapter
 import com.example.worldstarhiphop.databinding.FavoritesFragmentBinding
 import com.example.worldstarhiphop.databinding.FavoritesFragmentBinding.inflate
 import com.example.worldstarhiphop.network.database.TrackDatabase
 
 
 class FavoritesFragment : Fragment() {
-
 
     private var mediaPlayer: MediaPlayer = MediaPlayer()
     private lateinit var binding: FavoritesFragmentBinding
@@ -45,9 +46,11 @@ class FavoritesFragment : Fragment() {
         val favoriteTracksViewModel = ViewModelProviders.of(this,
             viewModelFactory).get(FavoriteTracksViewModel::class.java)
 
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
         binding.favoriteTracksViewModel = favoriteTracksViewModel
+
+        binding.recyclerLiedjeItem.adapter = TrackItemAdapter(mediaPlayer,this.activity!!)
 
     }
 

@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginRight="@dimen/medium_margin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/favoriteTrack"
             app:layout_constraintTop_toTopOf="parent">
@@ -83,7 +83,7 @@
             android:layout_gravity="center"
             android:layout_marginRight="@dimen/medium_margin"
             android:backgroundTint="@color/darkGray"
-            android:src="@drawable/ic_favorite_border_black_24dp"
+            android:src="@drawable/ic_playlist_add_black_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

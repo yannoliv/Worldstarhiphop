@@ -26,6 +26,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
 import com.example.worldstarhiphop.favorites.FavoriteTracksViewModel
 import com.example.worldstarhiphop.favorites.FavoriteTracksViewModelFactory
+import com.example.worldstarhiphop.favorites.FavoritesFragment
 import com.example.worldstarhiphop.network.database.TrackDatabase
 
 
@@ -103,7 +104,7 @@ class TrackItemAdapter(
 
                 vPosition = mPosition
                 mPosition = position
-                notifyDataSetChanged();
+                notifyDataSetChanged()
             }
         })
 
@@ -138,8 +139,14 @@ class TrackItemAdapter(
 
         // favoriete track
         holder.binding.favoriteTrack.setOnClickListener(View.OnClickListener{
-            viewModel.insert(track)
-            Log.i("yann",viewModel.tracks.toString())
+            // TODO dit fixen
+            if(fragmentActivity is Activity){
+                viewModel.remove(track)
+            } else{
+                viewModel.insert(track)
+            }
+            holder.binding.favoriteTrack.setImageResource(R.drawable.ic_playlist_add_check_black_24dp)
+            viewModel.getTracks()
         })
 
         holder.bind(track)
@@ -162,6 +169,7 @@ class TrackItemAdapter(
 
         fun bind(track: Track) {
             binding.track = track
+
             binding.executePendingBindings()
         }
 

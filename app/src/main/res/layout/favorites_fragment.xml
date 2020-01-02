@@ -28,9 +28,18 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerLiedjeItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            android:layout_margin="0dp"
+            android:clipToPadding="false"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            app:listTrackData="@{favoriteTracksViewModel.tracks}"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            tools:itemCount="5"
+            tools:listitem="@layout/track_item" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,10 +14,10 @@ interface TrackDatabaseDao {
     fun insert(track: Track)
 
     @Query("SELECT * from artist_track_table WHERE primary_key = :key")
-    fun get(key: Int): Track?
+    suspend fun get(key: Int): Track?
 
     @Query("SELECT * FROM artist_track_table ORDER BY primary_key DESC")
-    fun getAllTracks(): LiveData<List<Track>>
+    suspend fun getAllTracks(): List<Track>?
 
     @Query("DELETE FROM artist_track_table WHERE primary_key = :key")
     fun remove(key: Int)

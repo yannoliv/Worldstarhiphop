@@ -19,6 +19,7 @@ data class Track(
     var rank: Int,
     @ColumnInfo(name = "preview")
     var preview: String
+
 ){
     constructor(): this(0,"","",0,0,"")
 }
