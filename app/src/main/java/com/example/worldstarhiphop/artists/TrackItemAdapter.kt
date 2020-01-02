@@ -63,7 +63,12 @@ class TrackItemAdapter(
         val track = getItem(position)
         track.rank = position +1
 
-        // Viewmodel initialiseren
+        // juiste knopjes
+        if(fragment is FavoritesFragment) {
+            holder.binding.favoriteTrack.setImageResource(R.drawable.ic_clear_black_24dp)
+        }
+
+            // Viewmodel initialiseren
         val application = requireNotNull(this.fragmentActivity).application
         val dataSource = TrackDatabase.getInstance(application).trackDatabaseDao
         val viewModelFactory =
@@ -151,6 +156,7 @@ class TrackItemAdapter(
                     Toast.LENGTH_SHORT).show()
                 holder.binding.favoriteTrack.setImageResource(R.drawable.ic_playlist_add_check_black_24dp)
                 viewModel.insert(track)
+                holder.binding.favoriteTrack.setOnClickListener(null)
             }
         })
 

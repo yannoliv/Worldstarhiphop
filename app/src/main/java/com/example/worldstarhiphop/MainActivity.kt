@@ -33,14 +33,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupTabIcons(){
         binding.tabs.getTabAt(0)!!.setIcon(R.drawable.ic_playlist_play_black_24dp)
-        binding.tabs.getTabAt(1)!!.setIcon(R.drawable.ic_person_black_24dp)
+        binding.tabs.getTabAt(1)!!.setIcon(R.drawable.ic_favorite_border_black_24dp)
         binding.tabs.getTabAt(2)!!.setIcon(R.drawable.ic_radio_black_24dp)
     }
 
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(ArtistFragment(), "Artiesten")
-        adapter.addFragment(FavoritesFragment(), "Playlists")
+        adapter.addFragment(FavoritesFragment(), "Favorieten")
         adapter.addFragment(RadioFragment(), "Radio")
         viewPager.adapter = adapter
     }

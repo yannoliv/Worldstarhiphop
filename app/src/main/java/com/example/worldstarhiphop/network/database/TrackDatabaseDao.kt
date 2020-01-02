@@ -18,4 +18,12 @@ interface TrackDatabaseDao {
 
     @Query("DELETE FROM artist_track_table WHERE primary_key = :key")
     fun remove(key: Int)
+
+    /** Onderstaande methodes zijn voor te testen **/
+
+    @Query("SELECT * FROM artist_track_table ORDER BY primary_key DESC")
+    fun getAllTracksTesting(): List<Track>
+
+    @Query("SELECT * from artist_track_table WHERE primary_key = :key")
+    fun getTesting(key: Int): Track?
 }
