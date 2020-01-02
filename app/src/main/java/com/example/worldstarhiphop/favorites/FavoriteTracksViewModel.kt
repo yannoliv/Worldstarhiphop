@@ -18,66 +18,30 @@ class FavoriteTracksViewModel (
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-
-    private var _tracks = MutableLiveData<List<Track>>()
-
-    val tracks: LiveData<List<Track>>
-        get() = _tracks
+    var tracks = database.getAllTracks()
 
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
     }
 
-    init {
-        getTracks()
-    }
-
     fun insert(track:Track) {
-        //Als hij er al in zit, mag hij niet nog is toegevoegd worden ( SQL primary key stuff )
-        if(!tracks.value!!.contains(track)){
 
-            // We voegen de track hier ook al toe zodat de livedata automatisch
-            // wordt geupdate
-            GlobalScope.launch(Dispatchers.Main) {
-                val trackList: MutableList<Track> = mutableListOf()
-                tracks.value!!.forEach {
-                    trackList.add(it)
-                }
-                trackList.add(track)
-
-                _tracks.value = trackList
-            }
-
-            // Inserten in databank
-            uiScope.launch {
-                withContext(Dispatchers.IO) {
-                    database.insert(track)
-                }
+        // Inserten in databank
+        uiScope.launch {
+            withContext(Dispatchers.IO) {
+                //Als hij er al in zit, mag hij niet nog is toegevoegd worden ( SQL primary key stuff )
+                //TODO controleren of hij er al in zit
+                database.insert(track)
             }
         }
     }
 
     fun remove(track: Track) {
-        GlobalScope.launch(Dispatchers.Main) {
-            val trackList: MutableList<Track> = mutableListOf()
-            tracks.value!!.forEach {
-                if (it.id != track.id)
-                    trackList.add(it)
-            }
-            _tracks.value = trackList
-        }
-
         uiScope.launch {
             withContext(Dispatchers.IO) {
                 database.remove(track.id)
             }
-        }
-    }
-
-    fun getTracks(){
-        GlobalScope.launch(Dispatchers.Main) {
-            _tracks.value = database.getAllTracks()
         }
     }
 }

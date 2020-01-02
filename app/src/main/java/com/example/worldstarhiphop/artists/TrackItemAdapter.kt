@@ -152,7 +152,6 @@ class TrackItemAdapter(
                 holder.binding.favoriteTrack.setImageResource(R.drawable.ic_playlist_add_check_black_24dp)
                 viewModel.insert(track)
             }
-            viewModel.getTracks()
         })
 
         holder.bind(track)

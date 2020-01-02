@@ -1,5 +1,6 @@
 package com.example.worldstarhiphop
 
+import android.os.Handler
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -12,11 +13,14 @@ import com.example.worldstarhiphop.network.track.Contributor
 import com.example.worldstarhiphop.network.track.Track
 import com.example.worldstarhiphop.network.track.TrackArtist
 import junit.framework.Assert.assertEquals
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 @RunWith(AndroidJUnit4::class)
 class TrackDatabaseTest{
@@ -49,7 +53,7 @@ class TrackDatabaseTest{
         // Track testen
         trackDatabaseDao.insert(track)
         val testTrack = trackDatabaseDao.get(200)
-        assertEquals(testTrack!!.title, "yann")
+        assertEquals(testTrack.value!!.title, "yann")
     }
 
     @Test
@@ -68,10 +72,9 @@ class TrackDatabaseTest{
         trackDatabaseDao.insert(track4)
         trackDatabaseDao.remove(200)
 
-        val tracks = trackDatabaseDao.getAllTracks()
+        assertEquals(trackDatabaseDao.getAllTracks().value!!.count(), 3)
 
-        assertEquals(tracks!!.count(), 3)
-    }
+}
 
 
 }
