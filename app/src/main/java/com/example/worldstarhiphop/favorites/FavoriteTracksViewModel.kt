@@ -1,6 +1,7 @@
 package com.example.worldstarhiphop.favorites
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +12,7 @@ import com.example.worldstarhiphop.network.track.Track
 import kotlinx.coroutines.*
 
 class FavoriteTracksViewModel (
-    val database: TrackDatabaseDao,
+    private val database: TrackDatabaseDao,
     application: Application): AndroidViewModel(application){
 
     private var viewModelJob = Job()
@@ -44,6 +45,7 @@ class FavoriteTracksViewModel (
                     trackList.add(it)
                 }
                 trackList.add(track)
+
                 _tracks.value = trackList
             }
 
@@ -60,11 +62,12 @@ class FavoriteTracksViewModel (
         GlobalScope.launch(Dispatchers.Main) {
             val trackList: MutableList<Track> = mutableListOf()
             tracks.value!!.forEach {
-                trackList.add(it)
+                if (it.id != track.id)
+                    trackList.add(it)
             }
-            trackList.remove(track)
             _tracks.value = trackList
         }
+
         uiScope.launch {
             withContext(Dispatchers.IO) {
                 database.remove(track.id)

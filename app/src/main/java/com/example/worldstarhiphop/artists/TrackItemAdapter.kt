@@ -21,6 +21,7 @@ import android.graphics.drawable.ColorDrawable
 import android.R.attr.start
 import android.app.Activity
 import android.util.Log
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
@@ -141,13 +142,16 @@ class TrackItemAdapter(
 
         // favoriete track
         holder.binding.favoriteTrack.setOnClickListener(View.OnClickListener{
-            // TODO dit fixen
             if(fragment is FavoritesFragment){
+                Toast.makeText(fragmentActivity, track.title + " is verwijderd uit je favorieten",
+                    Toast.LENGTH_SHORT).show()
                 viewModel.remove(track)
             } else{
+                Toast.makeText(fragmentActivity, track.title + " is toegevoegd aan je favorieten",
+                    Toast.LENGTH_SHORT).show()
+                holder.binding.favoriteTrack.setImageResource(R.drawable.ic_playlist_add_check_black_24dp)
                 viewModel.insert(track)
             }
-            holder.binding.favoriteTrack.setImageResource(R.drawable.ic_playlist_add_check_black_24dp)
             viewModel.getTracks()
         })
 

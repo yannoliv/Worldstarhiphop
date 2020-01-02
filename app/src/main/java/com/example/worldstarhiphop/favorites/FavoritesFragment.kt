@@ -9,6 +9,7 @@ import android.view.ViewGroup
 
 import android.media.MediaPlayer
 import android.util.Log
+import androidx.lifecycle.Observer
 import com.example.worldstarhiphop.artists.TrackItemAdapter
 import com.example.worldstarhiphop.databinding.FavoritesFragmentBinding
 import com.example.worldstarhiphop.databinding.FavoritesFragmentBinding.inflate
