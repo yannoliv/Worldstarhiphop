@@ -22,9 +22,9 @@ class RadioViewModel(radioId: Int) : ViewModel() {
     val statusTracksVanRadio: LiveData<DeezerApiStatus>
         get() = _statusTracksVanRadio
 
-    private var _tracksVanRadio = MutableLiveData<List<RadioTrack>>()
+    private var _tracksVanRadio = MutableLiveData<List<Track>>()
 
-    val tracksVanRadio: LiveData<List<RadioTrack>>
+    val tracksVanRadio: LiveData<List<Track>>
         get() = _tracksVanRadio
 
 
@@ -36,14 +36,19 @@ class RadioViewModel(radioId: Int) : ViewModel() {
         getTracksFromRadio(radioId)
     }
 
-    fun getTracksFromRadio(radioId: Int){
+    private fun getTracksFromRadio(radioId: Int){
 
         coroutineScope.launch{
             val getPropertiesDeferred = DeezerAPI.retrofitService.getTracksVanRadio(radioId)
             try{
                 _statusTracksVanRadio.value = DeezerApiStatus.LOADING
                 val resultaat = getPropertiesDeferred.await()
-                _tracksVanRadio.value = resultaat.data
+                val unformattedTracks = resultaat.data
+                var rank: Int = 0
+                _tracksVanRadio.value = unformattedTracks.map {
+                    rank += 1
+                    Track(it.id, it.title, it.link, it.duration, rank, it.preview)
+                }
                 _statusTracksVanRadio.value = DeezerApiStatus.DONE
             }catch (t: Throwable){
                 _statusTracksVanRadio.value = DeezerApiStatus.ERROR

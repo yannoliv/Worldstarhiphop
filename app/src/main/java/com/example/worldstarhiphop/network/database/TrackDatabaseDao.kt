@@ -11,17 +11,14 @@ import com.example.worldstarhiphop.network.track.Track
 @Dao
 interface TrackDatabaseDao {
     @Insert
-    fun insert(track: ArtistTrack)
-
-    @Update
-    fun update(track: ArtistTrack)
+    fun insert(track: Track)
 
     @Query("SELECT * from artist_track_table WHERE primary_key = :key")
-    fun get(key: Int): ArtistTrack?
+    fun get(key: Int): Track?
 
     @Query("SELECT * FROM artist_track_table ORDER BY primary_key DESC")
-    fun getAllTracks(): LiveData<List<ArtistTrack>>
+    fun getAllTracks(): LiveData<List<Track>>
 
-    @Query("DELETE FROM artist_track_table")
-    fun clear()
+    @Query("DELETE FROM artist_track_table WHERE primary_key = :key")
+    fun remove(key: Int)
 }

@@ -1,20 +1,24 @@
 package com.example.worldstarhiphop.network.track
 
-import com.example.worldstarhiphop.network.album.Album
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-interface Track {
-    val id: Int
-    val readable:Boolean
-    val title: String
-    val title_short: String
-    val title_version:String
-    val link: String
-    val duration: Int
-    var rank: Int
-    val explicit_lyrics: Boolean
-    val explicit_content_lyrics: Int
-    val explicit_content_cover: Int
-    val preview: String
-    val album: Album
-    val type: String
+@Entity(tableName="artist_track_table")
+data class Track(
+    @PrimaryKey
+    @ColumnInfo(name = "primary_key")
+    var id: Int,
+    @ColumnInfo(name = "title")
+    var title: String,
+    @ColumnInfo(name = "link")
+    var link: String,
+    @ColumnInfo(name = "duration")
+    var duration: Int,
+    @ColumnInfo(name = "rank")
+    var rank: Int,
+    @ColumnInfo(name = "preview")
+    var preview: String
+){
+    constructor(): this(0,"","",0,0,"")
 }

@@ -44,18 +44,12 @@ class TrackDatabaseTest{
    @Throws(Exception::class)
     fun insertAndGetTrack() {
         // Track maken
-        val mockContributors: List<Contributor> = emptyList()
-        val artist: TrackArtist = TrackArtist(10,"yann","xxx")
-        val album: Album = Album(10,"titel","cover","xxx",
-            "xxx","xxx","xxx","tracklist","Album")
-        val track = ArtistTrack(200,true,"ff","fff","fff",
-            "",200,200,true,20,20,
-            "",mockContributors,artist,album,"")
+        val track = Track(200,"yann","abc.be",20,4,"abcde.be")
 
         // Track testen
         trackDatabaseDao.insert(track)
         val testTrack = trackDatabaseDao.get(200)
-        assertEquals(testTrack!!.title, "ff")
+        assertEquals(testTrack!!.title, "yann")
     }
 
 }

@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.example.worldstarhiphop.artists.ArtistFragment
-import com.example.worldstarhiphop.albums.AlbumFragment
+import com.example.worldstarhiphop.favorites.FavoritesFragment
 import com.example.worldstarhiphop.radios.RadioFragment
 import com.google.android.material.tabs.TabLayout
 
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupViewPager(viewPager: ViewPager) {
         val adapter = ViewPagerAdapter(supportFragmentManager)
         adapter.addFragment(ArtistFragment(), "Artiesten")
-        adapter.addFragment(AlbumFragment(), "Playlists")
+        adapter.addFragment(FavoritesFragment(), "Playlists")
         adapter.addFragment(RadioFragment(), "Radio")
         viewPager.adapter = adapter
     }

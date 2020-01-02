@@ -60,7 +60,7 @@ class ArtistItemAdapter(
         fun bind(artist: Artist, artistFragment: ArtistFragment, mediaPlayer: MediaPlayer) {
             binding.artist = artist
 
-            binding.recyclerLiedjeItem.adapter = TrackItemAdapter(mediaPlayer)
+            binding.recyclerLiedjeItem.adapter = TrackItemAdapter(mediaPlayer, artistFragment.activity!!)
 
             // Viewmodel initialiseren
             viewModel = ViewModelProviders.of(artistFragment)

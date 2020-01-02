@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.worldstarhiphop.network.DeezerAPI
 import com.example.worldstarhiphop.network.track.ArtistTrack
+import com.example.worldstarhiphop.network.track.Track
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -19,9 +20,9 @@ class ArtistGridItemViewModel : ViewModel() {
     val status: LiveData<DeezerApiStatus>
         get() = _status
 
-    private val _tracks= MutableLiveData<List<ArtistTrack>>()
+    private val _tracks= MutableLiveData<List<Track>>()
 
-    val tracks: LiveData<List<ArtistTrack>>
+    val tracks: LiveData<List<Track>>
         get() = _tracks
 
 
@@ -37,7 +38,12 @@ class ArtistGridItemViewModel : ViewModel() {
             try{
                 _status.value = DeezerApiStatus.LOADING
                 val resultaat = getPropertiesDeferred.await()
-                _tracks.value = resultaat.data
+                val unformattedTracks = resultaat.data
+                var rank: Int = 0
+                _tracks.value = unformattedTracks.map {
+                    rank += 1
+                    Track(it.id, it.title, it.link, it.duration, rank, it.preview)
+                }
                 _status.value = DeezerApiStatus.DONE
             }catch (t: Throwable){
                 _status.value = DeezerApiStatus.ERROR

@@ -19,16 +19,26 @@ import android.animation.ArgbEvaluator
 import android.graphics.drawable.TransitionDrawable
 import android.graphics.drawable.ColorDrawable
 import android.R.attr.start
-
+import android.app.Activity
+import android.util.Log
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProviders
+import com.example.worldstarhiphop.favorites.FavoriteTracksViewModel
+import com.example.worldstarhiphop.favorites.FavoriteTracksViewModelFactory
+import com.example.worldstarhiphop.network.database.TrackDatabase
 
 
 class TrackItemAdapter(
-    mediaPlayerInput: MediaPlayer
+    mediaPlayerInput: MediaPlayer,
+    fragmentInput: FragmentActivity
 ) : ListAdapter<Track, TrackItemAdapter.TrackViewHolder>(
     DiffCallback
 ) {
 
     private var mediaPlayer = mediaPlayerInput
+    private val fragmentActivity = fragmentInput
+    private lateinit var viewModel:FavoriteTracksViewModel
 
     // Onthouden wat de laatste positie was
     private var mPosition = -1
@@ -48,6 +58,17 @@ class TrackItemAdapter(
 
         val track = getItem(position)
         track.rank = position +1
+
+        // Viewmodel initialiseren
+        val application = requireNotNull(this.fragmentActivity).application
+        val dataSource = TrackDatabase.getInstance(application).trackDatabaseDao
+        val viewModelFactory =
+            FavoriteTracksViewModelFactory(
+                dataSource,
+                application
+            )
+        viewModel = ViewModelProviders.of(this.fragmentActivity,
+            viewModelFactory).get(FavoriteTracksViewModel::class.java)
 
         // maximum 1 item tegelijk kunnen selecteren in een recyclerview
         // Meer info: https://stackoverflow.com/questions/47707969/how-to-show-single-item-selected-in-recyclerview-using-kotlin
@@ -100,7 +121,7 @@ class TrackItemAdapter(
                     holder.focusTrack()
                     vPosition = mPosition
                     mPosition = position
-                    notifyDataSetChanged();
+                    notifyDataSetChanged()
                     mediaPlayer.start()
                 }
             } else{
@@ -109,7 +130,7 @@ class TrackItemAdapter(
                 // Posities goed steken. vPos = voorlaatste, mPos= laatste
                 vPosition = mPosition
                 mPosition = position
-                notifyDataSetChanged();
+                notifyDataSetChanged()
                 mediaPlayer.start()
             }
 
@@ -117,7 +138,8 @@ class TrackItemAdapter(
 
         // favoriete track
         holder.binding.favoriteTrack.setOnClickListener(View.OnClickListener{
-
+            viewModel.insert(track)
+            Log.i("yann",viewModel.tracks.toString())
         })
 
         holder.bind(track)
