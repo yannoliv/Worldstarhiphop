@@ -2,17 +2,16 @@ package com.example.worldstarhiphop.artists
 
 import android.media.AudioAttributes
 import android.media.MediaPlayer
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.dinuscxj.refresh.RecyclerRefreshLayout
 import com.example.worldstarhiphop.R
 import com.example.worldstarhiphop.databinding.ArtistsFragmentBinding
-
 
 class ArtistFragment : Fragment() {
 
@@ -28,7 +27,8 @@ class ArtistFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.artists_fragment, container, false)
@@ -44,7 +44,7 @@ class ArtistFragment : Fragment() {
         }
 
         // variabelen van ArtiestenFragment
-        binding.listArtiesten.adapter = ArtistItemAdapter(this,mediaPlayer)
+        binding.listArtiesten.adapter = ArtistItemAdapter(this, mediaPlayer)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
@@ -53,14 +53,13 @@ class ArtistFragment : Fragment() {
         return binding.root
     }
 
-    private fun initialiseerSwipeRefreshLayout(){
+    private fun initialiseerSwipeRefreshLayout() {
         val mSwipeRefreshLayout = binding.swipeContainer
         mSwipeRefreshLayout.isNestedScrollingEnabled = true
 
-        mSwipeRefreshLayout.setOnRefreshListener(RecyclerRefreshLayout.OnRefreshListener{
+        mSwipeRefreshLayout.setOnRefreshListener(RecyclerRefreshLayout.OnRefreshListener {
             viewModel.getArtists()
             mSwipeRefreshLayout.setRefreshing(false)
         })
     }
-
 }

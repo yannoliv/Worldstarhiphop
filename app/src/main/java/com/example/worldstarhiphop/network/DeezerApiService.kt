@@ -33,7 +33,7 @@ interface DeezerApiService {
 
     // Alle artiesten uit het genre Hip Hop, hun top 5 liedjes
     @GET("artist/{id}/top?limit=5")
-    fun getTracksVanArtiest(@Path("id") id:Int): Deferred<TrackListArtist>
+    fun getTracksVanArtiest(@Path("id") id: Int): Deferred<TrackListArtist>
 
     // Alle radio's van het genre Hip Hop
     @GET("genre/116/radios")
@@ -41,12 +41,11 @@ interface DeezerApiService {
 
     // Alle artistTracks van de radio die megegeven is.
     @GET("radio/{id}/tracks")
-    fun getTracksVanRadio(@Path("id") id:Int): Deferred<TrackListRadio>
+    fun getTracksVanRadio(@Path("id") id: Int): Deferred<TrackListRadio>
 }
 
-
-object DeezerAPI{
-    val retrofitService : DeezerApiService by lazy{
+object DeezerAPI {
+    val retrofitService: DeezerApiService by lazy {
         retrofit.create(DeezerApiService::class.java)
     }
 }

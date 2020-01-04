@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName="artist_track_table")
+@Entity(tableName = "artist_track_table")
 data class Track(
     @PrimaryKey
     @ColumnInfo(name = "primary_key")
@@ -20,6 +20,6 @@ data class Track(
     @ColumnInfo(name = "preview")
     var preview: String
 
-){
-    constructor(): this(0,"","",0,0,"")
+) {
+    constructor() : this(0, "", "", 0, 0, "")
 }

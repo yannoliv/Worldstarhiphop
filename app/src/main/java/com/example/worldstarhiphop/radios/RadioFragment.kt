@@ -1,12 +1,12 @@
 package com.example.worldstarhiphop.radios
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.dinuscxj.refresh.RecyclerRefreshLayout
 import com.example.worldstarhiphop.R
 import com.example.worldstarhiphop.databinding.RadiosFragmentBinding
@@ -23,13 +23,14 @@ class RadioFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.radios_fragment, container, false)
 
         // variabelen van ArtiestenFragment
-        binding.listRadios.adapter = RadioItemAdapter(this);
+        binding.listRadios.adapter = RadioItemAdapter(this)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
@@ -38,14 +39,13 @@ class RadioFragment : Fragment() {
         return binding.root
     }
 
-    private fun initialiseerSwipeRefreshLayout(){
+    private fun initialiseerSwipeRefreshLayout() {
         val mSwipeRefreshLayout = binding.swipeContainer
         mSwipeRefreshLayout.isNestedScrollingEnabled = true
 
-        mSwipeRefreshLayout.setOnRefreshListener(RecyclerRefreshLayout.OnRefreshListener{
+        mSwipeRefreshLayout.setOnRefreshListener(RecyclerRefreshLayout.OnRefreshListener {
             viewModel.getRadios()
             mSwipeRefreshLayout.setRefreshing(false)
         })
     }
-
 }

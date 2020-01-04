@@ -2,7 +2,6 @@ package com.example.worldstarhiphop.radios
 
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -12,7 +11,6 @@ import com.example.worldstarhiphop.artists.TrackItemAdapter
 import com.example.worldstarhiphop.databinding.RadioDetailBinding
 import com.example.worldstarhiphop.network.radio.Radio
 import com.google.gson.GsonBuilder
-
 
 class RadioDetailActivity() : AppCompatActivity() {
 
@@ -50,10 +48,7 @@ class RadioDetailActivity() : AppCompatActivity() {
             }
         })
 
-
-
-        //binding.radio = viewModel.radios.value!!.filter { r -> r.id == radioId}.firstOrNull()
-        //binding.radio = getIntent().getExtras().getString("geklikte_radio");
-
+        // binding.radio = viewModel.radios.value!!.filter { r -> r.id == radioId}.firstOrNull()
+        // binding.radio = getIntent().getExtras().getString("geklikte_radio");
     }
 }

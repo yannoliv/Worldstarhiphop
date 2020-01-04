@@ -15,7 +15,6 @@ import com.example.worldstarhiphop.databinding.RadioGridItemBinding
 import com.example.worldstarhiphop.network.radio.Radio
 import com.google.gson.Gson
 
-
 class RadioItemAdapter(radioFragmentInput: RadioFragment) : ListAdapter<Radio, RadioItemAdapter.RadioViewHolder>(
     DiffCallback
 ) {
@@ -47,7 +46,7 @@ class RadioItemAdapter(radioFragmentInput: RadioFragment) : ListAdapter<Radio, R
         }
     }
 
-    class RadioViewHolder(private var binding: RadioGridItemBinding, viewType:Int):
+    class RadioViewHolder(private var binding: RadioGridItemBinding, viewType: Int) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(radio: Radio, radioFragment: RadioFragment) {
@@ -61,7 +60,7 @@ class RadioItemAdapter(radioFragmentInput: RadioFragment) : ListAdapter<Radio, R
 
                 // het object radio parsen naar een json
                 val intent = Intent(radioFragment.activity, RadioDetailActivity::class.java)
-                    .putExtra("geklikte_radio",jsonRadio)
+                    .putExtra("geklikte_radio", jsonRadio)
                 var options: ActivityOptions? = null
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -72,9 +71,9 @@ class RadioItemAdapter(radioFragmentInput: RadioFragment) : ListAdapter<Radio, R
                         binding.radioImage,
                         radioFragment.context!!.getString(R.string.radio_image_transition)
                     )
-                    startActivity(radioFragment.context!!,intent, options.toBundle())
-                }else{
-                    startActivity(radioFragment.context!!,intent, null)
+                    startActivity(radioFragment.context!!, intent, options.toBundle())
+                } else {
+                    startActivity(radioFragment.context!!, intent, null)
                 }
             })
 

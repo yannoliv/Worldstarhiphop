@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.worldstarhiphop.network.DeezerAPI
 import com.example.worldstarhiphop.network.radio.Radio
-import com.example.worldstarhiphop.network.track.RadioTrack
-import com.example.worldstarhiphop.network.track.Track
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -28,25 +26,25 @@ class RadiosViewModel : ViewModel() {
         get() = _radios
 
     // [H8 - Exercise 9]
-    private var viewModelJob= Job()
-    private val coroutineScope= CoroutineScope(viewModelJob + Dispatchers.Main)
+    private var viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    init{
+    init {
         getRadios()
     }
 
     // Is public zodat we kunnen refreshen
-    fun getRadios(){
+    fun getRadios() {
 
-        coroutineScope.launch{
+        coroutineScope.launch {
             val getPropertiesDeferred = DeezerAPI.retrofitService.getRadios()
-            try{
+            try {
                 _status.value =
                     DeezerApiStatus.LOADING
                 val resultaat = getPropertiesDeferred.await()
                 _radios.value = resultaat.data
                 _status.value = DeezerApiStatus.DONE
-            }catch (t: Throwable){
+            } catch (t: Throwable) {
                 _status.value =
                     DeezerApiStatus.ERROR
                 _radios.value = ArrayList()

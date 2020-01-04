@@ -7,17 +7,17 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.worldstarhiphop.network.artist.Artist
+import com.example.worldstarhiphop.artists.ArtistItemAdapter
 import com.example.worldstarhiphop.artists.ArtistViewModel
 import com.example.worldstarhiphop.artists.TrackItemAdapter
-import com.example.worldstarhiphop.artists.ArtistItemAdapter
+import com.example.worldstarhiphop.network.artist.Artist
 import com.example.worldstarhiphop.network.radio.Radio
 import com.example.worldstarhiphop.network.track.Track
 import com.example.worldstarhiphop.radios.RadioItemAdapter
 import com.example.worldstarhiphop.radios.RadiosViewModel
 
 @BindingAdapter("imageUrl")
-fun bindImage(imgView: ImageView, imgUrl: String?){
+fun bindImage(imgView: ImageView, imgUrl: String?) {
     imgUrl?.let {
         val imgUri = it.toUri().buildUpon().scheme("https").build()
         Glide.with(imgView.context)
@@ -38,7 +38,7 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Artist>?) {
 }
 
 @BindingAdapter("listTrackData")
-fun bindRecyclerViewTrack(recyclerView: RecyclerView, data: List<Track>?){
+fun bindRecyclerViewTrack(recyclerView: RecyclerView, data: List<Track>?) {
     val adapter = recyclerView.adapter as TrackItemAdapter
     adapter.submitList(data)
 }
@@ -59,7 +59,6 @@ fun bindStatus(statusImageView: ImageView, status: ArtistViewModel.DeezerApiStat
         }
     }
 }
-
 
 // Radios
 @BindingAdapter("listDataRadio")

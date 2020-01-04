@@ -1,20 +1,16 @@
 package com.example.worldstarhiphop.favorites
 
-import androidx.lifecycle.ViewModelProviders
+import android.media.MediaPlayer
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import android.media.MediaPlayer
-import android.util.Log
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.example.worldstarhiphop.artists.TrackItemAdapter
 import com.example.worldstarhiphop.databinding.FavoritesFragmentBinding
 import com.example.worldstarhiphop.databinding.FavoritesFragmentBinding.inflate
 import com.example.worldstarhiphop.network.database.TrackDatabase
-
 
 class FavoritesFragment : Fragment() {
 
@@ -27,7 +23,8 @@ class FavoritesFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = inflate(inflater, container, false)
@@ -51,8 +48,6 @@ class FavoritesFragment : Fragment() {
 
         binding.favoriteTracksViewModel = favoriteTracksViewModel
 
-        binding.recyclerLiedjeItem.adapter = TrackItemAdapter(mediaPlayer,this.activity!!, this)
-
+        binding.recyclerLiedjeItem.adapter = TrackItemAdapter(mediaPlayer, this.activity!!, this)
     }
-
 }

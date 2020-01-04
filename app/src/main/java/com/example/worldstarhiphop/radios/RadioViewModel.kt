@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.worldstarhiphop.network.DeezerAPI
-import com.example.worldstarhiphop.network.radio.Radio
-import com.example.worldstarhiphop.network.track.RadioTrack
 import com.example.worldstarhiphop.network.track.Track
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,20 +25,19 @@ class RadioViewModel(radioId: Int) : ViewModel() {
     val tracksVanRadio: LiveData<List<Track>>
         get() = _tracksVanRadio
 
-
     // [H8 - Exercise 9]
-    private var viewModelJob= Job()
-    private val coroutineScope= CoroutineScope(viewModelJob + Dispatchers.Main)
+    private var viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    init{
+    init {
         getTracksFromRadio(radioId)
     }
 
-    private fun getTracksFromRadio(radioId: Int){
+    private fun getTracksFromRadio(radioId: Int) {
 
-        coroutineScope.launch{
+        coroutineScope.launch {
             val getPropertiesDeferred = DeezerAPI.retrofitService.getTracksVanRadio(radioId)
-            try{
+            try {
                 _statusTracksVanRadio.value = DeezerApiStatus.LOADING
                 val resultaat = getPropertiesDeferred.await()
                 val unformattedTracks = resultaat.data
@@ -50,7 +47,7 @@ class RadioViewModel(radioId: Int) : ViewModel() {
                     Track(it.id, it.title, it.link, it.duration, rank, it.preview)
                 }
                 _statusTracksVanRadio.value = DeezerApiStatus.DONE
-            }catch (t: Throwable){
+            } catch (t: Throwable) {
                 _statusTracksVanRadio.value = DeezerApiStatus.ERROR
                 _tracksVanRadio.value = ArrayList()
             }

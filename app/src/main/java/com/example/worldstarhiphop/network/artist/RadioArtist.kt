@@ -1,7 +1,6 @@
 package com.example.worldstarhiphop.network.artist
 
 import com.squareup.moshi.Json
-import java.util.*
 
 data class RadioArtist(
     val id: Int,

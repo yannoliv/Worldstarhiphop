@@ -1,35 +1,27 @@
 package com.example.worldstarhiphop.artists
 
+import android.R.attr.start
+import android.animation.ArgbEvaluator
+import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import androidx.transition.Fade
-import androidx.transition.Transition
-import com.example.worldstarhiphop.R
-import com.example.worldstarhiphop.databinding.TrackItemBinding
-import com.example.worldstarhiphop.network.track.Track
-import android.R.attr.start
-import android.animation.ObjectAnimator
-import android.animation.ArgbEvaluator
-import android.graphics.drawable.TransitionDrawable
-import android.graphics.drawable.ColorDrawable
-import android.R.attr.start
-import android.app.Activity
-import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.example.worldstarhiphop.R
+import com.example.worldstarhiphop.databinding.TrackItemBinding
 import com.example.worldstarhiphop.favorites.FavoriteTracksViewModel
 import com.example.worldstarhiphop.favorites.FavoriteTracksViewModelFactory
 import com.example.worldstarhiphop.favorites.FavoritesFragment
 import com.example.worldstarhiphop.network.database.TrackDatabase
-
+import com.example.worldstarhiphop.network.track.Track
 
 class TrackItemAdapter(
     mediaPlayerInput: MediaPlayer,
@@ -42,7 +34,7 @@ class TrackItemAdapter(
     private var mediaPlayer = mediaPlayerInput
     private val fragmentActivity = fragmentActivityInput
     private val fragment = fragmentInput
-    private lateinit var viewModel:FavoriteTracksViewModel
+    private lateinit var viewModel: FavoriteTracksViewModel
 
     // Onthouden wat de laatste positie was
     private var mPosition = -1
@@ -61,10 +53,10 @@ class TrackItemAdapter(
     override fun onBindViewHolder(holder: TrackViewHolder, position: Int) {
 
         val track = getItem(position)
-        track.rank = position +1
+        track.rank = position + 1
 
         // juiste knopjes
-        if(fragment is FavoritesFragment) {
+        if (fragment is FavoritesFragment) {
             holder.binding.favoriteTrack.setImageResource(R.drawable.ic_clear_black_24dp)
         }
 
@@ -81,14 +73,12 @@ class TrackItemAdapter(
 
         // maximum 1 item tegelijk kunnen selecteren in een recyclerview
         // Meer info: https://stackoverflow.com/questions/47707969/how-to-show-single-item-selected-in-recyclerview-using-kotlin
-        if (mPosition == position)
-        {
+        if (mPosition == position) {
             // set selected here
             holder.focusTrack()
-        } else
-        {
-            //set unselected here
-            if(vPosition == position){
+        } else {
+            // set unselected here
+            if (vPosition == position) {
                 holder.unfocusTrack()
             }
         }
@@ -98,7 +88,7 @@ class TrackItemAdapter(
             // Oftewel focussed de balk als je op een nieuwe track klikt
             // OF als de mediaplayer gepauzeert is, en je klikt op de balk wiens pauzeknop
             // je net hebt ingedrukt.
-            if(mPosition != position || mPosition == position && !mediaPlayer.isPlaying){
+            if (mPosition != position || mPosition == position && !mediaPlayer.isPlaying) {
                 holder.initialiseerLiedje(track, mediaPlayer)
                 mediaPlayer.start()
 
@@ -116,24 +106,23 @@ class TrackItemAdapter(
             }
         })
 
-
         // Klik op de pauze knop van het liedje
         holder.binding.relativeLayout.setOnClickListener(View.OnClickListener {
-            if(mPosition == position){
-                if(mediaPlayer.isPlaying){
+            if (mPosition == position) {
+                if (mediaPlayer.isPlaying) {
                     mediaPlayer.pause()
                     holder.unfocusTrack()
                     // De balk is niet meer gefocust en posities moeten dus gereset worden
                     vPosition = -1
                     mPosition = -1
-                } else{
+                } else {
                     holder.focusTrack()
                     vPosition = mPosition
                     mPosition = position
                     notifyDataSetChanged()
                     mediaPlayer.start()
                 }
-            } else{
+            } else {
                 holder.initialiseerLiedje(track, mediaPlayer)
                 holder.focusTrack()
                 // Posities goed steken. vPos = voorlaatste, mPos= laatste
@@ -142,16 +131,15 @@ class TrackItemAdapter(
                 notifyDataSetChanged()
                 mediaPlayer.start()
             }
-
         })
 
         // favoriete track
-        holder.binding.favoriteTrack.setOnClickListener(View.OnClickListener{
-            if(fragment is FavoritesFragment){
+        holder.binding.favoriteTrack.setOnClickListener(View.OnClickListener {
+            if (fragment is FavoritesFragment) {
                 Toast.makeText(fragmentActivity, track.title + " is verwijderd uit je favorieten",
                     Toast.LENGTH_SHORT).show()
                 viewModel.remove(track)
-            } else{
+            } else {
                 Toast.makeText(fragmentActivity, track.title + " is toegevoegd aan je favorieten",
                     Toast.LENGTH_SHORT).show()
                 holder.binding.favoriteTrack.setImageResource(R.drawable.ic_playlist_add_check_black_24dp)
@@ -173,7 +161,7 @@ class TrackItemAdapter(
         }
     }
 
-    class TrackViewHolder(private var bindingInput: TrackItemBinding):
+    class TrackViewHolder(private var bindingInput: TrackItemBinding) :
         RecyclerView.ViewHolder(bindingInput.root) {
 
         val binding = bindingInput
@@ -195,7 +183,7 @@ class TrackItemAdapter(
             objectAnimatorFunctie(binding.imageViewPlayPauseCircle, "colorFilter", Color.DKGRAY, Color.WHITE)
         }
 
-        fun unfocusTrack(){
+        fun unfocusTrack() {
             binding.imageViewPlayPause.setImageResource(R.drawable.ic_play_arrow_black_24dp)
 
             objectAnimatorFunctie(binding.liedjeBalk, "backgroundColor", Color.parseColor("#991a1a"), Color.WHITE)
@@ -206,11 +194,10 @@ class TrackItemAdapter(
             objectAnimatorFunctie(binding.imageViewPlayPauseCircle, "colorFilter", Color.WHITE, Color.DKGRAY)
         }
 
-
-        fun initialiseerLiedje(track: Track, mediaPlayer: MediaPlayer){
+        fun initialiseerLiedje(track: Track, mediaPlayer: MediaPlayer) {
             try {
                 mediaPlayer.reset()
-                mediaPlayer.setVolume( 1.0f,1.0f)
+                mediaPlayer.setVolume(1.0f, 1.0f)
                 mediaPlayer.setDataSource(track.preview)
                 mediaPlayer.prepare()
             } catch (e: Exception) {
@@ -218,7 +205,7 @@ class TrackItemAdapter(
             }
         }
 
-        private fun objectAnimatorFunctie(view: View, propertyName: String, startColor: Int, endColor: Int){
+        private fun objectAnimatorFunctie(view: View, propertyName: String, startColor: Int, endColor: Int) {
             ObjectAnimator.ofObject(
                 view, // Object to animating
                 propertyName, // Property to animate
@@ -228,11 +215,8 @@ class TrackItemAdapter(
             ).setDuration(200) // Duration in milliseconds
             .start() // Finally, start the anmation
         }
-
     }
-
 }
-
 
 /*
                if(selectedPosition == position){

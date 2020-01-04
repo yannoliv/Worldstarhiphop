@@ -19,22 +19,21 @@ class ArtistGridItemViewModel : ViewModel() {
     val status: LiveData<DeezerApiStatus>
         get() = _status
 
-    private val _tracks= MutableLiveData<List<Track>>()
+    private val _tracks = MutableLiveData<List<Track>>()
 
     val tracks: LiveData<List<Track>>
         get() = _tracks
 
-
     // [H8 - Exercise 9]
-    private var viewModelJob= Job()
-    private val coroutineScope= CoroutineScope(viewModelJob + Dispatchers.Main)
+    private var viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     // Is public zodat we kunnen refreshen
-    fun getTracksVanArtiest(id: Int){
+    fun getTracksVanArtiest(id: Int) {
 
-        coroutineScope.launch{
+        coroutineScope.launch {
             val getPropertiesDeferred = DeezerAPI.retrofitService.getTracksVanArtiest(id)
-            try{
+            try {
                 _status.value = DeezerApiStatus.LOADING
                 val resultaat = getPropertiesDeferred.await()
                 val unformattedTracks = resultaat.data
@@ -44,7 +43,7 @@ class ArtistGridItemViewModel : ViewModel() {
                     Track(it.id, it.title, it.link, it.duration, rank, it.preview)
                 }
                 _status.value = DeezerApiStatus.DONE
-            }catch (t: Throwable){
+            } catch (t: Throwable) {
                 _status.value = DeezerApiStatus.ERROR
                 _tracks.value = ArrayList()
             }

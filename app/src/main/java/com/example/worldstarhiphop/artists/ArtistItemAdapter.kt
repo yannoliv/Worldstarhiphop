@@ -1,21 +1,19 @@
 package com.example.worldstarhiphop.artists
 
 import android.media.MediaPlayer
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.example.worldstarhiphop.network.artist.Artist
-import androidx.lifecycle.ViewModelProviders
-import com.example.worldstarhiphop.R
 import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.example.worldstarhiphop.R
 import com.example.worldstarhiphop.databinding.ArtistGridItemBinding
-
+import com.example.worldstarhiphop.network.artist.Artist
 
 class ArtistItemAdapter(
     artistFragmentInput: ArtistFragment,
@@ -25,7 +23,7 @@ class ArtistItemAdapter(
 ) {
 
     private var artiestenFragment = artistFragmentInput
-    private var mediaPlayer= mediaPlayerInput
+    private var mediaPlayer = mediaPlayerInput
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -52,7 +50,7 @@ class ArtistItemAdapter(
         }
     }
 
-    class ArtistViewHolder(private var binding: ArtistGridItemBinding, viewType:Int):
+    class ArtistViewHolder(private var binding: ArtistGridItemBinding, viewType: Int) :
         RecyclerView.ViewHolder(binding.root) {
 
         private lateinit var viewModel: ArtistGridItemViewModel
@@ -70,7 +68,7 @@ class ArtistItemAdapter(
             // onclick listener voor de liedjes te openen.
             binding.whitebarArtist.setOnClickListener(View.OnClickListener {
 
-                if(binding.recyclerLiedjeItem.visibility == View.GONE){
+                if (binding.recyclerLiedjeItem.visibility == View.GONE) {
 
                     viewModel.getTracksVanArtiest(artist.id)
 
@@ -95,7 +93,6 @@ class ArtistItemAdapter(
                     // "witte bar" zichtbaar maken
                     binding.streepBovenRecyclerView.visibility = View.VISIBLE
                     binding.recyclerLiedjeItem.visibility = View.VISIBLE
-
                 } else {
                     // Pijltje animeren
                     val rotateHalf = AnimationUtils.loadAnimation(
